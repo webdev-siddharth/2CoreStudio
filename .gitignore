@@ -22,7 +22,11 @@
 
 # misc
 .DS_Store
+Thumbs.db
+Desktop.ini
 *.pem
+*.p12
+*.pfx
 
 # debug
 npm-debug.log*
@@ -30,6 +34,7 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 *-server.log
+*.log
 
 # env files (can opt-in for committing if needed)
 .env*
@@ -43,3 +48,18 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# ide
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# supabase
+supabase/.temp/
+supabase/.branches/
+supabase/seed.sql
+
+# cloudflare opennext
+.open-next/
+.dev.vars
+cloudflare-env.d.ts

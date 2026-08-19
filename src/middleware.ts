@@ -5,12 +5,10 @@ const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
 const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "";
 
 /**
- * Next.js 16 proxy (the middleware.ts replacement).
- * Refreshes the Supabase auth session on every request by running
- * getUser() — if the access token is close to expiry, the library
- * exchanges the refresh token and writes the new session cookies.
+ * Edge middleware — refreshes the Supabase auth session on every request.
+ * Renamed from proxy.ts (Next.js 16) to middleware.ts for Cloudflare compatibility.
  */
-export async function proxy(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   let response = NextResponse.next({ request: { headers: request.headers } });
 
   if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
