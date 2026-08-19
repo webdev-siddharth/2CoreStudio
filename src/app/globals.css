@@ -1,0 +1,404 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ */
+/* 2coreStudio — Neo-brutalist / Arcade Marquee theme                  */
+/* Tokens live on <html data-theme="dark|light"> — swapped at runtime  */
+/* by ThemeProvider. Utilities map through @theme inline so Tailwind   */
+/* classes (bg-bg, text-ink, border-ink, bg-magenta, ...) follow the   */
+/* active theme.                                                       */
+/* ------------------------------------------------------------------ */
+
+:root,
+html[data-theme="dark"] {
+  --bg: #1a1428;
+  --surface: #241b38;
+  --surface2: #2d2244;
+  --ink: #ede6f5;
+  --magenta: #ff4fa0;
+  --orange: #ffa05c;
+  --green: #3fb950;
+  --red: #ff5c5c;
+  --muted: #b3a4cc;
+}
+
+html[data-theme="light"] {
+  --bg: #f0e9f7;
+  --surface: #ffffff;
+  --surface2: #f7f0fc;
+  --ink: #241b38;
+  --magenta: #d81b72;
+  --orange: #d9720e;
+  --green: #1f7a33;
+  --red: #c92a2a;
+  --muted: #7a6b92;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface2: var(--surface2);
+  --color-ink: var(--ink);
+  --color-magenta: var(--magenta);
+  --color-orange: var(--orange);
+  --color-muted: var(--muted);
+  --font-display: var(--font-archivo);
+  --font-mono: var(--font-space-mono);
+}
+
+html {
+  background: var(--bg);
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-space-mono), ui-monospace, monospace;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+
+.display {
+  font-family: var(--font-archivo), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.logo {
+  font-family: var(--font-heming), var(--font-archivo), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  background: linear-gradient(
+    to right,
+    var(--ink),
+    var(--magenta),
+    var(--ink)
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: var(--ink);
+  transition:
+    color 0.2s ease-in-out,
+    text-decoration-color 0.2s ease-in-out;
+  animation: logo-sweep 3s ease-in-out infinite;
+}
+
+.logo:hover {
+  color: transparent;
+  text-decoration: underline;
+  text-decoration-color: var(--ink);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+}
+
+.logo:hover span {
+  color: transparent;
+}
+
+@keyframes logo-sweep {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo {
+    animation: none;
+  }
+}
+
+/* ---------------------------------------------------------------- */
+/* Neo-brutalist primitives                                          */
+/* ---------------------------------------------------------------- */
+
+.nb-btn {
+  display: inline-block;
+  border: 3px solid var(--ink);
+  background: var(--magenta);
+  color: var(--bg);
+  font-family: var(--font-archivo), sans-serif;
+  font-size: 0.75rem;
+  padding: 10px 16px;
+  text-transform: uppercase;
+  box-shadow: 5px 5px 0 var(--ink);
+  cursor: pointer;
+  transition: transform 0.08s;
+  text-decoration: none;
+}
+
+.nb-btn:hover:not(:active):not(:disabled) {
+  transform: translate(-2px, -2px);
+}
+
+.nb-btn:active {
+  transform: translate(5px, 5px);
+  box-shadow: 0 0 0 var(--ink);
+}
+
+.nb-btn:focus-visible {
+  outline: 3px dashed var(--orange);
+  outline-offset: 3px;
+}
+
+.nb-btn--secondary {
+  background: var(--surface2);
+  color: var(--ink);
+}
+
+.nb-btn--orange {
+  background: var(--orange);
+}
+
+.nb-btn--disabled,
+.nb-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  box-shadow: 5px 5px 0 var(--muted);
+  border-color: var(--muted);
+}
+
+.nb-card {
+  background: var(--surface);
+  border: 3px solid var(--ink);
+  box-shadow: 7px 7px 0 var(--ink);
+  padding: 16px;
+  position: relative;
+}
+
+.nb-card--link {
+  transition: transform 0.08s, box-shadow 0.08s;
+}
+
+.nb-card--link:hover:not(:active) {
+  transform: translate(-2px, -2px);
+  box-shadow: 9px 9px 0 var(--ink);
+}
+
+.nb-card--link:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--ink);
+}
+
+.nb-card--lift {
+  transition:
+    translate 0.15s ease-out,
+    box-shadow 0.15s ease-out;
+}
+
+.nb-card--lift:hover:not(:active) {
+  translate: 0 -4px;
+  box-shadow: 9px 9px 0 var(--ink);
+}
+
+.nb-chip {
+  border: 3px solid var(--ink);
+  background: var(--surface);
+  color: var(--ink);
+  padding: 7px 14px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: transform 0.08s;
+}
+
+.nb-chip:hover:not(:active) {
+  transform: translate(-2px, -2px);
+  background: var(--surface2);
+}
+
+.nb-chip:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--ink);
+}
+
+.nb-chip--on {
+  background: var(--orange);
+  color: var(--bg);
+}
+
+.nb-tag {
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border: 2px solid var(--ink);
+  transform: rotate(-2deg);
+  display: inline-block;
+}
+
+.nb-tag--a {
+  background: var(--magenta);
+  color: var(--bg);
+}
+
+.nb-tag--b {
+  background: var(--orange);
+  color: var(--bg);
+}
+
+.nb-status {
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 4px 9px;
+  border: 2px solid var(--ink);
+  display: inline-block;
+}
+
+.nb-status--published {
+  background: var(--green);
+  color: var(--bg);
+}
+
+.nb-status--draft {
+  background: var(--orange);
+  color: var(--bg);
+}
+
+.nb-status--unpublished {
+  background: var(--red);
+  color: var(--bg);
+}
+
+.nb-badge-corner {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  background: var(--orange);
+  color: var(--bg);
+  border: 3px solid var(--ink);
+  font-family: var(--font-archivo), sans-serif;
+  font-size: 0.62rem;
+  padding: 5px 9px;
+  transform: rotate(4deg);
+  z-index: 10;
+}
+
+.nb-input {
+  border: 3px solid var(--ink);
+  background: var(--surface);
+  color: var(--ink);
+  padding: 9px 12px;
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.78rem;
+  box-shadow: 3px 3px 0 var(--ink);
+  outline: none;
+}
+
+.nb-input:focus {
+  border-color: var(--magenta);
+}
+
+.nb-input::placeholder {
+  color: var(--muted);
+}
+
+.field-label {
+  display: block;
+  margin-bottom: 4px;
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+/* ---------------------------------------------------------------- */
+/* Marquee signature strip                                           */
+/* ---------------------------------------------------------------- */
+
+.marquee-wrap {
+  border-bottom: 3px solid var(--ink);
+  overflow: hidden;
+  white-space: nowrap;
+  background: var(--magenta);
+}
+
+.marquee-track {
+  display: inline-flex;
+  animation: marquee-scroll 14s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+.marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 22px;
+  font-family: var(--font-archivo), sans-serif;
+  font-size: 0.85rem;
+  color: var(--bg);
+  border-right: 3px solid var(--ink);
+}
+
+.marquee-item:nth-child(even) {
+  background: var(--orange);
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* ---------------------------------------------------------------- */
+/* Card tilt (Phase 3) — perspective wrapper on the grid item        */
+/* ---------------------------------------------------------------- */
+
+.tilt-card {
+  transform: perspective(900px) rotateX(var(--tilt-x, 0deg))
+    rotateY(var(--tilt-y, 0deg));
+  transition: transform 0.15s ease-out;
+}
+
+@media (hover: none) {
+  .tilt-card {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tilt-card {
+    transform: none !important;
+    transition: none;
+  }
+}
+
+/* ---------------------------------------------------------------- */
+/* Reduced-motion global guard                                       */
+/* ---------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
