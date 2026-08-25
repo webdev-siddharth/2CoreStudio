@@ -64,3 +64,5 @@ supabase/seed.sql
 .dev.vars
 cloudflare-env.d.ts
 .wrangler/
+
+.open-next-test/
