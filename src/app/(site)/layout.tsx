@@ -48,7 +48,7 @@ export default async function SiteLayout({
       <Marquee />
       <Header user={user} isAdmin={isAdmin} />
       <main className="flex-1">{children}</main>
-      <Footer />
+      <Footer isAdmin={isAdmin} />
     </div>
   );
 }

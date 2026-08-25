@@ -28,7 +28,7 @@ export default async function AdminAppsPage() {
 
   return (
     <div className="mx-auto max-w-6xl px-5 py-10">
-      <h1 className="display text-2xl text-ink">MANAGE APPS</h1>
+      <h1 className="display text-2xl text-text">MANAGE APPS</h1>
       <p className="mt-2 mb-8 font-mono text-xs uppercase tracking-widest text-muted">
         {apps.length} {apps.length === 1 ? "app" : "apps"} · published +
         drafts

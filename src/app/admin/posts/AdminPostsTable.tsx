@@ -27,7 +27,7 @@ function field(
 function ErrorNote({ error }: { error: string | null }) {
   if (!error) return null;
   return (
-    <p className="mt-3 border-2 border-ink bg-surface2 px-3 py-2 font-mono text-xs text-orange">
+    <p className="mt-3 border-2 border-ink bg-surface2 px-3 py-2 font-mono text-xs text-secondary">
       {error}
     </p>
   );
@@ -64,7 +64,7 @@ export function AdminPostsTable({ posts }: { posts: PostRow[] }) {
         <button
           type="button"
           onClick={() => setShowCreate((v) => !v)}
-          className="nb-btn nb-btn--orange"
+          className="nb-btn nb-btn--secondary"
         >
           {showCreate ? "Close ✕" : "+ New post"}
         </button>
@@ -102,11 +102,11 @@ export function AdminPostsTable({ posts }: { posts: PostRow[] }) {
               <span className="field-label">Cover URL</span>
               {field("cover_url", "")}
             </label>
-            <label className="flex cursor-pointer items-center gap-2 font-mono text-[0.68rem] font-bold uppercase tracking-wider text-ink sm:col-span-2">
+            <label className="flex cursor-pointer items-center gap-2 font-mono text-[0.68rem] font-bold uppercase tracking-wider text-text sm:col-span-2">
               <input
                 type="checkbox"
                 name="is_published"
-                className="h-4 w-4 accent-[var(--magenta)]"
+                className="h-4 w-4 accent-[var(--primary)]"
               />
               Published
             </label>
@@ -130,7 +130,7 @@ export function AdminPostsTable({ posts }: { posts: PostRow[] }) {
             return (
               <li key={post.id} className="nb-card flex flex-col gap-3">
                 <div className="flex flex-wrap items-start gap-2">
-                  <p className="display min-w-0 flex-1 text-base text-ink">
+                  <p className="display min-w-0 flex-1 text-base text-text">
                     {post.title}
                   </p>
                   <span className={`nb-status ${status.className}`}>
@@ -141,11 +141,11 @@ export function AdminPostsTable({ posts }: { posts: PostRow[] }) {
                 <dl className="space-y-1.5 font-mono text-[0.68rem] text-muted">
                   <div className="flex justify-between gap-3">
                     <dt className="uppercase tracking-wider">Last edit</dt>
-                    <dd className="text-ink">{formatDate(post.updated_at)}</dd>
+                    <dd className="text-text">{formatDate(post.updated_at)}</dd>
                   </div>
                   <div className="flex justify-between gap-3">
                     <dt className="uppercase tracking-wider">Published</dt>
-                    <dd className="text-ink">
+                    <dd className="text-text">
                       {formatDate(post.published_at)}
                     </dd>
                   </div>
@@ -226,12 +226,12 @@ export function AdminPostsTable({ posts }: { posts: PostRow[] }) {
                       {field("cover_url", post.cover_url)}
                     </label>
                     <div className="flex flex-wrap items-center gap-4 sm:col-span-2">
-                      <label className="flex cursor-pointer items-center gap-2 font-mono text-[0.68rem] font-bold uppercase tracking-wider text-ink">
+                      <label className="flex cursor-pointer items-center gap-2 font-mono text-[0.68rem] font-bold uppercase tracking-wider text-text">
                         <input
                           type="checkbox"
                           name="is_published"
                           defaultChecked={post.is_published}
-                          className="h-4 w-4 accent-[var(--magenta)]"
+                          className="h-4 w-4 accent-[var(--primary)]"
                         />
                         Published
                       </label>

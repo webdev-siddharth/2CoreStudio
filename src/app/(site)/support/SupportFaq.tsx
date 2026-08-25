@@ -1,12 +1,13 @@
+import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
 
 const FAQS = [
   {
-    q: "Is it really free?",
-    a: "Yes — the core catalog is free with no account required. Premium apps are clearly marked and always optional.",
+    q: "Is the catalog really free?",
+    a: "Yes — the core catalog is free with no account required. Premium apps are clearly marked, and buying one is always optional.",
   },
   {
-    q: "Do I need an account?",
+    q: "Do I need an account to download?",
     a: "No. Instant-play apps download and run with zero signup. An account is only needed for premium purchases and to keep your download history.",
   },
   {
@@ -15,17 +16,29 @@ const FAQS = [
   },
   {
     q: "How do updates work?",
-    a: "Each app ships a per-platform version list with changelogs — you can see exactly what changed before you download the next build.",
+    a: "Each app ships a per-platform version list with changelogs, and every release is announced on the News timeline. You can see exactly what changed before you update.",
   },
   {
-    q: "Is my data safe?",
-    a: "Profiles stay minimal, analytics are anonymous event counts, and everything is locked behind per-user access rules. We collect only what the apps need.",
+    q: "How do I restore a purchase?",
+    a: "iOS and Android purchases restore from the store receipt — just sign in and restore, no extra charge. Web purchases are tied to your account on the profile page.",
+  },
+  {
+    q: "Why am I still seeing an old version?",
+    a: "Almost always the cache. Hard refresh web apps (Ctrl/Cmd + Shift + R) and re-download desktop builds from your download history.",
+  },
+  {
+    q: "Where is my data stored and is it safe?",
+    a: "Data is hosted with our providers (Supabase and Cloudflare) and protected by per-user access rules. The short and full versions live on the security page.",
+  },
+  {
+    q: "Still stuck?",
+    a: "No problem — email us, or use the form below. A human reads every message, and bug reports with logs get fixed fastest.",
   },
 ];
 
-export function HomeFaq() {
+export function SupportFaq() {
   return (
-    <section className="border-b-[3px] border-ink bg-surface2">
+    <section id="faq" className="border-b-[3px] border-ink bg-surface2">
       <div className="mx-auto max-w-3xl px-5 py-14">
         <Reveal>
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted">
@@ -57,6 +70,19 @@ export function HomeFaq() {
             </Reveal>
           ))}
         </div>
+        <Reveal delay={120}>
+          <p className="mt-8 font-mono text-xs leading-relaxed text-muted">
+            Didn&apos;t find it? The FAQ covers decisions, not every detail —
+            search the topics above or{" "}
+            <Link
+              href="#contact"
+              className="font-bold text-primary no-underline hover:text-secondary"
+            >
+              write to us
+            </Link>
+            .
+          </p>
+        </Reveal>
       </div>
     </section>
   );

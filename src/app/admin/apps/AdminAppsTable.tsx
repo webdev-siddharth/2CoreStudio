@@ -9,7 +9,7 @@ import type { AppPlatformRow, AppWithPlatforms } from "@/lib/types";
 function ErrorNote({ error }: { error: string | null }) {
   if (!error) return null;
   return (
-    <p className="mt-3 border-2 border-ink bg-surface2 px-3 py-2 font-mono text-xs text-orange">
+    <p className="mt-3 border-2 border-ink bg-surface2 px-3 py-2 font-mono text-xs text-secondary">
       {error}
     </p>
   );
@@ -51,7 +51,7 @@ export function AdminAppsTable({ apps }: { apps: AppWithPlatforms[] }) {
       <ErrorNote error={error} />
 
       <div className="mb-6">
-        <Link href="/admin/apps/new" className="nb-btn nb-btn--orange">
+        <Link href="/admin/apps/new" className="nb-btn nb-btn--secondary">
           + New app
         </Link>
       </div>
@@ -70,7 +70,7 @@ export function AdminAppsTable({ apps }: { apps: AppWithPlatforms[] }) {
             return (
               <li key={app.id} className="nb-card flex flex-col gap-3">
                 <div className="flex flex-wrap items-start gap-2">
-                  <p className="display min-w-0 flex-1 text-base text-ink">
+                  <p className="display min-w-0 flex-1 text-base text-text">
                     {app.title}
                   </p>
                   <span className={`nb-status ${status.className}`}>
@@ -92,19 +92,19 @@ export function AdminAppsTable({ apps }: { apps: AppWithPlatforms[] }) {
                 <dl className="space-y-1.5 font-mono text-[0.68rem] text-muted">
                   <div className="flex justify-between gap-3">
                     <dt className="uppercase tracking-wider">Version</dt>
-                    <dd className="text-ink">
+                    <dd className="text-text">
                       {version ? `v${version}` : "—"}
                     </dd>
                   </div>
                   <div className="flex justify-between gap-3">
                     <dt className="uppercase tracking-wider">Platforms</dt>
-                    <dd className="text-ink">
+                    <dd className="text-text">
                       {app.app_platforms.length}
                     </dd>
                   </div>
                   <div className="flex justify-between gap-3">
                     <dt className="uppercase tracking-wider">Last edit</dt>
-                    <dd className="text-ink">
+                    <dd className="text-text">
                       {formatDate(app.updated_at)}
                     </dd>
                   </div>

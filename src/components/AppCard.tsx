@@ -31,6 +31,8 @@ export function AppCard({ app }: { app: AppRow }) {
     const y = (e.clientY - rect.top) / rect.height - 0.5;
     el.style.setProperty("--tilt-y", `${(x * 6).toFixed(2)}deg`);
     el.style.setProperty("--tilt-x", `${(-y * 6).toFixed(2)}deg`);
+    el.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+    el.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
   };
 
   const onPointerLeave = () => {
@@ -44,12 +46,12 @@ export function AppCard({ app }: { app: AppRow }) {
     <Link
       ref={cardRef}
       href={`/apps/${app.slug}`}
-      className="nb-card tilt-card flex flex-col no-underline"
+      className="nb-card tilt-card card-spotlight flex flex-col no-underline"
       onPointerMove={onPointerMove}
       onPointerLeave={onPointerLeave}
     >
-      <div className="mb-3.5 h-[110px] border-[3px] border-ink bg-[repeating-linear-gradient(45deg,var(--magenta),var(--magenta)_10px,var(--orange)_10px,var(--orange)_20px)]" />
-      <div className="card-title display text-lg text-ink">{app.title}</div>
+      <div className="mb-3.5 h-[110px] border-[3px] border-ink bg-[repeating-linear-gradient(45deg,var(--primary),var(--primary)_10px,var(--secondary)_10px,var(--secondary)_20px)]" />
+      <div className="card-title display text-lg text-text">{app.title}</div>
       <div className="mb-3.5 mt-2 flex gap-2">
         <span className="nb-tag nb-tag--a">{app.category}</span>
         <span className={`nb-tag nb-tag--b`}>

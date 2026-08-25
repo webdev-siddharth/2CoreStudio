@@ -96,11 +96,11 @@ export default async function PostDetailPage({
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted">
             {formatDate(post.published_at ?? post.created_at)}
           </p>
-          <h1 className="display mt-3 max-w-3xl text-4xl text-ink sm:text-6xl">
+          <h1 className="display mt-3 max-w-3xl text-4xl text-text sm:text-6xl">
             {post.title}
           </h1>
           {post.excerpt && (
-            <p className="mt-5 max-w-2xl font-mono text-sm leading-relaxed text-ink">
+            <p className="mt-5 max-w-2xl font-mono text-sm leading-relaxed text-text">
               {post.excerpt}
             </p>
           )}
@@ -111,7 +111,7 @@ export default async function PostDetailPage({
         {bodyParagraphs.length > 0 ? (
           <div className="space-y-4">
             {bodyParagraphs.map((p, i) => (
-              <p key={i} className="font-mono text-sm leading-relaxed text-ink">
+              <p key={i} className="font-mono text-sm leading-relaxed text-text">
                 {p}
               </p>
             ))}
@@ -122,7 +122,7 @@ export default async function PostDetailPage({
 
         <Link
           href="/news"
-          className="mt-10 inline-block py-1 font-mono text-[0.68rem] font-bold uppercase tracking-wider text-ink no-underline hover:text-magenta md:py-0"
+          className="mt-10 inline-block py-1 font-mono text-[0.68rem] font-bold uppercase tracking-wider text-text no-underline hover:text-primary md:py-0"
         >
           ← Back to news
         </Link>

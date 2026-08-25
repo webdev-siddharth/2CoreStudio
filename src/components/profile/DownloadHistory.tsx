@@ -59,7 +59,7 @@ export function DownloadHistory({ userId }: { userId: string }) {
 
   return (
     <div id="downloads" className="mt-6 scroll-mt-6 border-t-[3px] border-dashed border-ink pt-5">
-      <p className="display mb-3 text-sm text-ink">MY DOWNLOADS</p>
+      <p className="display mb-3 text-sm text-text">MY DOWNLOADS</p>
 
       {error && (
         <p className="font-mono text-[0.65rem] text-muted">
@@ -88,7 +88,7 @@ export function DownloadHistory({ userId }: { userId: string }) {
               {event.apps ? (
                 <Link
                   href={`/apps/${event.apps.slug}`}
-                  className="font-mono text-[0.7rem] font-bold text-ink no-underline hover:text-magenta"
+                  className="font-mono text-[0.7rem] font-bold text-text no-underline hover:text-primary"
                 >
                   {event.apps.title}
                 </Link>

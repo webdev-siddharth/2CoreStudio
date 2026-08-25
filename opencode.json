@@ -24,7 +24,7 @@
     "windframe": {
       "type": "remote",
       "url": "https://mcp.windframe.dev/mcp",
-      "enabled": false
+      "enabled": true
     }
   }
 }

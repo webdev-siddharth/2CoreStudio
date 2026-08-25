@@ -31,7 +31,7 @@ export function HomeBenefits() {
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted">
             Why 2corestudio
           </p>
-          <h2 className="display mt-3 text-3xl text-ink sm:text-4xl">
+          <h2 className="display mt-3 text-3xl text-text sm:text-4xl">
             Built for every platform. Built for you.
           </h2>
         </Reveal>
@@ -39,10 +39,10 @@ export function HomeBenefits() {
           {BENEFITS.map((benefit, i) => (
             <Reveal key={benefit.title} delay={i * 80}>
               <div className="nb-card flex h-full flex-col">
-                <div className="mb-4 grid h-12 w-12 place-items-center border-[3px] border-ink bg-surface2 text-2xl text-magenta shadow-[3px_3px_0_var(--ink)]">
+                <div className="mb-4 grid h-12 w-12 place-items-center border-[3px] border-ink bg-surface2 text-2xl text-primary shadow-[3px_3px_0_var(--ink)]">
                   {benefit.glyph}
                 </div>
-                <h3 className="display text-base text-ink">{benefit.title}</h3>
+                <h3 className="display text-base text-text">{benefit.title}</h3>
                 <p className="mt-2 text-[0.78rem] leading-relaxed text-muted">
                   {benefit.body}
                 </p>

@@ -28,7 +28,7 @@ export function SearchNav() {
         onClick={() => setOpen(true)}
         aria-label="Search software"
         aria-expanded={false}
-        className="cursor-pointer border-[3px] border-ink bg-surface p-2 text-ink shadow-[4px_4px_0_var(--ink)] transition-transform duration-75 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-surface2 hover:text-magenta active:translate-x-1 active:translate-y-1 active:shadow-none"
+        className="cursor-pointer border-[3px] border-ink bg-surface p-2 text-text shadow-[4px_4px_0_var(--ink)] transition-transform duration-75 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-surface2 hover:text-primary active:translate-x-1 active:translate-y-1 active:shadow-none"
       >
         <svg
           width="14"
@@ -74,7 +74,7 @@ export function SearchNav() {
           setOpen(false);
         }}
         aria-label="Close search"
-        className="cursor-pointer border-[3px] border-ink bg-surface p-2 text-ink shadow-[4px_4px_0_var(--ink)] transition-transform duration-75 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-surface2 hover:text-magenta active:translate-x-1 active:translate-y-1 active:shadow-none"
+        className="cursor-pointer border-[3px] border-ink bg-surface p-2 text-text shadow-[4px_4px_0_var(--ink)] transition-transform duration-75 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-surface2 hover:text-primary active:translate-x-1 active:translate-y-1 active:shadow-none"
       >
         <span className="grid h-[15px] w-[15px] place-items-center font-mono text-xs font-bold leading-none">✕</span>
       </button>

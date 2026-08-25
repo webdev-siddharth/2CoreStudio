@@ -7,10 +7,10 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { createClient } from "@/lib/supabase/client";
 
 const ITEM_CLASS =
-  "block w-full cursor-pointer border-[3px] border-ink bg-surface px-3 py-2 text-left font-mono text-[0.7rem] font-bold uppercase tracking-wider text-ink no-underline shadow-[4px_4px_0_var(--ink)] transition-transform duration-75 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-surface2 hover:text-magenta active:translate-x-1 active:translate-y-1 active:shadow-none";
+  "block w-full cursor-pointer border-[3px] border-ink bg-surface px-3 py-2 text-left font-mono text-[0.7rem] font-bold uppercase tracking-wider text-text no-underline shadow-[4px_4px_0_var(--ink)] transition-transform duration-75 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-surface2 hover:text-primary active:translate-x-1 active:translate-y-1 active:shadow-none";
 
 const SIGN_OUT_CLASS =
-  "block w-full cursor-pointer border-[3px] border-ink bg-surface px-3 py-2 text-left font-mono text-[0.7rem] font-bold uppercase tracking-wider text-[var(--red)] no-underline shadow-[4px_4px_0_var(--ink)] transition-transform duration-75 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-surface2 hover:text-magenta active:translate-x-1 active:translate-y-1 active:shadow-none";
+  "block w-full cursor-pointer border-[3px] border-ink bg-surface px-3 py-2 text-left font-mono text-[0.7rem] font-bold uppercase tracking-wider text-[var(--red)] no-underline shadow-[4px_4px_0_var(--ink)] transition-transform duration-75 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-surface2 hover:text-primary active:translate-x-1 active:translate-y-1 active:shadow-none";
 
 function PersonIcon({ className }: { className?: string }) {
   return (
@@ -79,7 +79,7 @@ export function AccountMenu({
         aria-label="Account menu"
         aria-haspopup="menu"
         aria-expanded={open}
-        className="cursor-pointer border-[3px] border-ink bg-surface p-1.5 text-ink shadow-[4px_4px_0_var(--ink)] transition-transform duration-75 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-surface2 hover:text-magenta active:translate-x-1 active:translate-y-1 active:shadow-none"
+        className="cursor-pointer border-[3px] border-ink bg-surface p-1.5 text-text shadow-[4px_4px_0_var(--ink)] transition-transform duration-75 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-surface2 hover:text-primary active:translate-x-1 active:translate-y-1 active:shadow-none"
       >
         <PersonIcon className="h-5 w-5" />
       </button>
@@ -91,10 +91,10 @@ export function AccountMenu({
         >
           {user && (
             <div className="flex items-center gap-2.5 border-b-[3px] border-dashed border-ink px-4 py-3">
-              <span className="grid h-8 w-8 shrink-0 place-items-center border-2 border-ink bg-surface2 text-magenta">
+              <span className="grid h-8 w-8 shrink-0 place-items-center border-2 border-ink bg-surface2 text-primary">
                 <PersonIcon className="h-4 w-4" />
               </span>
-              <span className="min-w-0 flex-1 truncate font-mono text-[0.65rem] leading-tight text-ink">
+              <span className="min-w-0 flex-1 truncate font-mono text-[0.65rem] leading-tight text-text">
                 {user.email}
               </span>
             </div>

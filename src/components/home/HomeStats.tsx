@@ -22,7 +22,7 @@ export function HomeStats() {
             <div className="nb-card grid h-full place-items-center py-6 text-center">
               <p
                 className={`display text-5xl ${
-                  i % 2 === 0 ? "text-magenta" : "text-orange"
+                  i % 2 === 0 ? "text-primary" : "text-secondary"
                 }`}
               >
                 {stat.value}

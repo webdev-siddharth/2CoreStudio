@@ -86,10 +86,10 @@ export default function HeroSlider({ apps }: { apps: AppRow[] }) {
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted">
             Every platform. One studio.
           </p>
-          <h1 className="display mt-4 text-5xl text-ink sm:text-7xl">
-            2CORE<span className="text-magenta">STUDIO</span>
+          <h1 className="display mt-4 text-5xl text-text sm:text-7xl">
+            2CORE<span className="text-primary">STUDIO</span>
           </h1>
-          <p className="mx-auto mt-6 max-w-xl font-mono text-sm leading-relaxed text-ink">
+          <p className="mx-auto mt-6 max-w-xl font-mono text-sm leading-relaxed text-text">
             Multi-platform apps for web, Windows, Mac, Android, iOS and Linux —
             built with speed, shipped with soul.
           </p>
@@ -121,11 +121,11 @@ export default function HeroSlider({ apps }: { apps: AppRow[] }) {
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted">
             Featured app
           </p>
-          <h1 className="display mt-4 text-5xl text-ink sm:text-7xl">
+          <h1 className="display mt-4 text-5xl text-text sm:text-7xl">
             {app.title}
           </h1>
           {app.description && (
-            <p className="mx-auto mt-6 max-w-xl font-mono text-sm leading-relaxed text-ink">
+            <p className="mx-auto mt-6 max-w-xl font-mono text-sm leading-relaxed text-text">
               {app.description}
             </p>
           )}
@@ -165,11 +165,11 @@ export default function HeroSlider({ apps }: { apps: AppRow[] }) {
               <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted">
                 Featured — {app.category}
               </p>
-              <h2 className="display mt-3 max-w-2xl text-4xl text-ink sm:text-6xl">
+              <h2 className="display mt-3 max-w-2xl text-4xl text-text sm:text-6xl">
                 {app.title}
               </h2>
               {app.description && (
-                <p className="mt-4 max-w-xl font-mono text-sm leading-relaxed text-ink">
+                <p className="mt-4 max-w-xl font-mono text-sm leading-relaxed text-text">
                   {app.description}
                 </p>
               )}
@@ -187,7 +187,7 @@ export default function HeroSlider({ apps }: { apps: AppRow[] }) {
           type="button"
           onClick={prev}
           aria-label="Previous app"
-          className="cursor-pointer border-[3px] border-ink bg-surface px-3 py-2 font-mono text-sm font-bold text-ink shadow-[4px_4px_0_var(--ink)] transition-transform duration-75 active:translate-x-1 active:translate-y-1 active:shadow-none"
+          className="cursor-pointer border-[3px] border-ink bg-surface px-3 py-2 font-mono text-sm font-bold text-text shadow-[4px_4px_0_var(--ink)] transition-transform duration-75 active:translate-x-1 active:translate-y-1 active:shadow-none"
         >
           ←
         </button>
@@ -197,7 +197,7 @@ export default function HeroSlider({ apps }: { apps: AppRow[] }) {
           type="button"
           onClick={next}
           aria-label="Next app"
-          className="cursor-pointer border-[3px] border-ink bg-surface px-3 py-2 font-mono text-sm font-bold text-ink shadow-[4px_4px_0_var(--ink)] transition-transform duration-75 active:translate-x-1 active:translate-y-1 active:shadow-none"
+          className="cursor-pointer border-[3px] border-ink bg-surface px-3 py-2 font-mono text-sm font-bold text-text shadow-[4px_4px_0_var(--ink)] transition-transform duration-75 active:translate-x-1 active:translate-y-1 active:shadow-none"
         >
           →
         </button>
@@ -213,12 +213,12 @@ export default function HeroSlider({ apps }: { apps: AppRow[] }) {
             aria-label={`Go to slide ${i + 1}: ${app.title}`}
             aria-current={i === index}
             className={`grid h-8 w-8 cursor-pointer place-items-center bg-transparent p-0 md:block md:h-3 md:w-3 md:border-[3px] md:border-ink md:shadow-[2px_2px_0_var(--ink)] md:transition-colors ${
-              i === index ? "md:bg-magenta" : "md:bg-surface"
+              i === index ? "md:bg-primary" : "md:bg-surface"
             }`}
           >
             <span
               className={`block h-3 w-3 border-[3px] border-ink shadow-[2px_2px_0_var(--ink)] transition-colors md:hidden ${
-                i === index ? "bg-magenta" : "bg-surface"
+                i === index ? "bg-primary" : "bg-surface"
               }`}
             />
           </button>

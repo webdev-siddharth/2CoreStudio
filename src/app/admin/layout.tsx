@@ -37,32 +37,32 @@ export default async function AdminLayout({
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3">
           <Link
             href="/admin"
-            className="display text-sm text-ink no-underline hover:text-magenta"
+            className="display text-sm text-text no-underline hover:text-primary"
           >
-            ADMIN<span className="text-magenta">CONSOLE</span>
+            ADMIN<span className="text-primary">CONSOLE</span>
           </Link>
           <nav className="flex flex-wrap gap-x-4 gap-y-2">
             <Link
               href="/admin"
-              className="py-1 text-[0.68rem] font-bold uppercase tracking-wider text-ink no-underline hover:text-magenta md:py-0"
+              className="py-1 text-[0.68rem] font-bold uppercase tracking-wider text-text no-underline hover:text-primary md:py-0"
             >
               Dashboard
             </Link>
             <Link
               href="/admin/apps"
-              className="py-1 text-[0.68rem] font-bold uppercase tracking-wider text-ink no-underline hover:text-magenta md:py-0"
+              className="py-1 text-[0.68rem] font-bold uppercase tracking-wider text-text no-underline hover:text-primary md:py-0"
             >
               Apps
             </Link>
             <Link
               href="/admin/posts"
-              className="py-1 text-[0.68rem] font-bold uppercase tracking-wider text-ink no-underline hover:text-magenta md:py-0"
+              className="py-1 text-[0.68rem] font-bold uppercase tracking-wider text-text no-underline hover:text-primary md:py-0"
             >
               Posts
             </Link>
             <Link
               href="/"
-              className="py-1 text-[0.68rem] font-bold uppercase tracking-wider text-muted no-underline hover:text-ink md:py-0"
+              className="py-1 text-[0.68rem] font-bold uppercase tracking-wider text-muted no-underline hover:text-text md:py-0"
             >
               ← Back to site
             </Link>

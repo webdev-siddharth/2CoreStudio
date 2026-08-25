@@ -102,11 +102,11 @@ export default async function AppDetailPage({
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted">
             {app.category}
           </p>
-          <h1 className="display mt-3 text-4xl text-ink sm:text-6xl">
+          <h1 className="display mt-3 text-4xl text-text sm:text-6xl">
             {app.title}
           </h1>
           {app.description && (
-            <p className="mt-5 max-w-2xl font-mono text-sm leading-relaxed text-ink">
+            <p className="mt-5 max-w-2xl font-mono text-sm leading-relaxed text-text">
               {app.description}
             </p>
           )}
@@ -126,7 +126,7 @@ export default async function AppDetailPage({
           {bodyParagraphs.length > 0 ? (
             <div className="space-y-4">
               {bodyParagraphs.map((p, i) => (
-                <p key={i} className="font-mono text-sm leading-relaxed text-ink">
+                <p key={i} className="font-mono text-sm leading-relaxed text-text">
                   {p}
                 </p>
               ))}
@@ -150,7 +150,7 @@ export default async function AppDetailPage({
 
           {/* Platform table */}
           <div className="mt-10">
-            <h2 className="display mb-4 text-lg text-ink">AVAILABLE ON</h2>
+            <h2 className="display mb-4 text-lg text-text">AVAILABLE ON</h2>
             {app.app_platforms.length === 0 ? (
               <p className="font-mono text-xs text-muted">
                 Builds for this app are being prepared. Check back soon.
@@ -162,7 +162,7 @@ export default async function AppDetailPage({
                     key={platform.id}
                     className="flex flex-wrap items-center justify-between gap-2 px-4 py-3"
                   >
-                    <span className="font-mono text-xs font-bold uppercase tracking-wider text-ink">
+                    <span className="font-mono text-xs font-bold uppercase tracking-wider text-text">
                       {PLATFORM_LABELS[platform.platform as Platform] ??
                         platform.platform}
                     </span>
@@ -187,7 +187,7 @@ export default async function AppDetailPage({
         {/* Sidebar */}
         <aside className="lg:pt-2">
           <div className="nb-card">
-            <h2 className="display mb-4 text-base text-ink">GET THE APP</h2>
+            <h2 className="display mb-4 text-base text-text">GET THE APP</h2>
             <DownloadButton
               appId={app.id}
               requiresAuth={app.requires_auth}
@@ -205,7 +205,7 @@ export default async function AppDetailPage({
             )}
             <Link
               href="/apps"
-              className="mt-5 inline-block py-1 font-mono text-[0.68rem] font-bold uppercase tracking-wider text-ink no-underline hover:text-magenta md:py-0"
+              className="mt-5 inline-block py-1 font-mono text-[0.68rem] font-bold uppercase tracking-wider text-text no-underline hover:text-primary md:py-0"
             >
               ← Back to catalog
             </Link>

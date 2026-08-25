@@ -18,7 +18,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/news`, lastModified },
     { url: `${baseUrl}/about`, lastModified },
     { url: `${baseUrl}/support`, lastModified },
+    { url: `${baseUrl}/support/security`, lastModified },
     { url: `${baseUrl}/profile`, lastModified },
+    { url: `${baseUrl}/legal`, lastModified },
+    { url: `${baseUrl}/legal/privacy`, lastModified },
+    { url: `${baseUrl}/legal/terms`, lastModified },
+    { url: `${baseUrl}/legal/cookies`, lastModified },
   ];
 
   if (!isUnconfiguredSupabase()) {

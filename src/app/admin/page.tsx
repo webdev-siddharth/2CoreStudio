@@ -83,7 +83,7 @@ export default async function AdminDashboardPage() {
       <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted">
         Overview
       </p>
-      <h1 className="display mt-1 text-3xl text-ink">DASHBOARD</h1>
+      <h1 className="display mt-1 text-3xl text-text">DASHBOARD</h1>
 
       <div className="mt-6 flex flex-wrap gap-3">
         <Link href="/admin/apps" className="nb-btn">
@@ -92,7 +92,7 @@ export default async function AdminDashboardPage() {
         <Link href="/admin/posts" className="nb-btn">
           Posts
         </Link>
-        <Link href="/admin/apps/new" className="nb-btn nb-btn--orange">
+        <Link href="/admin/apps/new" className="nb-btn nb-btn--secondary">
           + New app
         </Link>
       </div>
@@ -100,56 +100,56 @@ export default async function AdminDashboardPage() {
       <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {/* Apps stats */}
         <div className="nb-card">
-          <p className="display text-sm text-ink">APPS</p>
-          <p className="mt-3 display text-4xl text-ink">{apps.length}</p>
+          <p className="display text-sm text-text">APPS</p>
+          <p className="mt-3 display text-4xl text-text">{apps.length}</p>
           <dl className="mt-4 space-y-1.5 font-mono text-[0.68rem] text-muted">
             <div className="flex justify-between gap-3">
               <dt className="uppercase tracking-wider">Published</dt>
-              <dd className="text-ink">{publishedApps}</dd>
+              <dd className="text-text">{publishedApps}</dd>
             </div>
             <div className="flex justify-between gap-3">
               <dt className="uppercase tracking-wider">Drafts</dt>
-              <dd className="text-ink">{draftApps}</dd>
+              <dd className="text-text">{draftApps}</dd>
             </div>
             <div className="flex justify-between gap-3">
               <dt className="uppercase tracking-wider">Featured</dt>
-              <dd className="text-ink">{featuredApps}</dd>
+              <dd className="text-text">{featuredApps}</dd>
             </div>
           </dl>
         </div>
 
         {/* Posts stats */}
         <div className="nb-card">
-          <p className="display text-sm text-ink">POSTS</p>
-          <p className="mt-3 display text-4xl text-ink">{posts.length}</p>
+          <p className="display text-sm text-text">POSTS</p>
+          <p className="mt-3 display text-4xl text-text">{posts.length}</p>
           <dl className="mt-4 space-y-1.5 font-mono text-[0.68rem] text-muted">
             <div className="flex justify-between gap-3">
               <dt className="uppercase tracking-wider">Published</dt>
-              <dd className="text-ink">{publishedPosts}</dd>
+              <dd className="text-text">{publishedPosts}</dd>
             </div>
             <div className="flex justify-between gap-3">
               <dt className="uppercase tracking-wider">Drafts</dt>
-              <dd className="text-ink">{draftPosts}</dd>
+              <dd className="text-text">{draftPosts}</dd>
             </div>
             <div className="flex justify-between gap-3">
               <dt className="uppercase tracking-wider">Unpublished</dt>
-              <dd className="text-ink">{unpublishedPosts}</dd>
+              <dd className="text-text">{unpublishedPosts}</dd>
             </div>
           </dl>
         </div>
 
         {/* Analytics stats */}
         <div className="nb-card">
-          <p className="display text-sm text-ink">ANALYTICS</p>
+          <p className="display text-sm text-text">ANALYTICS</p>
           <p className="mt-3 font-mono text-xs text-muted">all time</p>
           <dl className="mt-3 space-y-1.5 font-mono text-[0.68rem] text-muted">
             <div className="flex justify-between gap-3">
               <dt className="uppercase tracking-wider">Views</dt>
-              <dd className="text-ink">{views}</dd>
+              <dd className="text-text">{views}</dd>
             </div>
             <div className="flex justify-between gap-3">
               <dt className="uppercase tracking-wider">Downloads</dt>
-              <dd className="text-ink">{downloads}</dd>
+              <dd className="text-text">{downloads}</dd>
             </div>
           </dl>
         </div>
@@ -174,7 +174,7 @@ export default async function AdminDashboardPage() {
                     className="nb-card nb-card--link block no-underline"
                   >
                     <div className="flex items-start justify-between gap-2">
-                      <p className="display min-w-0 flex-1 text-sm text-ink">
+                      <p className="display min-w-0 flex-1 text-sm text-text">
                         {app.title}
                       </p>
                       <span className={`nb-status ${status.className}`}>
@@ -209,7 +209,7 @@ export default async function AdminDashboardPage() {
                     className="nb-card nb-card--link block no-underline"
                   >
                     <div className="flex items-start justify-between gap-2">
-                      <p className="display min-w-0 flex-1 text-sm text-ink">
+                      <p className="display min-w-0 flex-1 text-sm text-text">
                         {post.title}
                       </p>
                       <span className={`nb-status ${status.className}`}>
@@ -238,14 +238,14 @@ export default async function AdminDashboardPage() {
             {recentEvents.map((event) => (
               <li key={event.id} className="nb-card">
                 <div className="flex items-start justify-between gap-2">
-                  <p className="min-w-0 flex-1 truncate font-mono text-xs text-ink">
+                  <p className="min-w-0 flex-1 truncate font-mono text-xs text-text">
                     {event.apps?.title ?? "Unknown app"}
                   </p>
                   <span
                     className="nb-status"
                     style={{
-                      background: "var(--magenta)",
-                      color: "var(--bg)",
+                      background: "var(--primary)",
+                      color: "var(--ink)",
                     }}
                   >
                     {event.event === "view" ? "New Visitor" : "New Download"}

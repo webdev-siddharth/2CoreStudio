@@ -23,35 +23,35 @@ export function ProfileClient({
   if (user) {
     return (
       <div className="nb-card">
-        <p className="display text-lg text-ink">
+        <p className="display text-lg text-text">
           HELLO,{" "}
-          <span className="text-magenta">
+          <span className="text-primary">
             {(profile?.full_name ?? profile?.username ?? "there").toUpperCase()}
           </span>
         </p>
         <dl className="mt-5 space-y-2 font-mono text-xs">
           <div className="flex justify-between gap-4">
             <dt className="uppercase tracking-wider text-muted">Email</dt>
-            <dd className="text-ink">{user.email}</dd>
+            <dd className="text-text">{user.email}</dd>
           </div>
           <div className="flex justify-between gap-4">
             <dt className="uppercase tracking-wider text-muted">Username</dt>
-            <dd className="text-ink">{profile?.username ?? "—"}</dd>
+            <dd className="text-text">{profile?.username ?? "—"}</dd>
           </div>
           <div className="flex justify-between gap-4">
             <dt className="uppercase tracking-wider text-muted">Tier</dt>
-            <dd className="text-ink">{profile?.account_tier ?? "standard"}</dd>
+            <dd className="text-text">{profile?.account_tier ?? "standard"}</dd>
           </div>
           <div className="flex justify-between gap-4">
             <dt className="uppercase tracking-wider text-muted">Role</dt>
-            <dd className="text-ink">{profile?.role ?? "user"}</dd>
+            <dd className="text-text">{profile?.role ?? "user"}</dd>
           </div>
         </dl>
 
         {profile?.role === "admin" && (
           <Link
             href="/admin"
-            className="nb-btn nb-btn--orange mt-6"
+            className="nb-btn nb-btn--secondary mt-6"
           >
             Admin console →
           </Link>
@@ -149,7 +149,7 @@ function EditProfile({
           setUsername(profile?.username ?? "");
           setFullName(profile?.full_name ?? "");
         }}
-        className="py-1.5 font-mono text-[0.68rem] font-bold uppercase tracking-wider text-ink no-underline hover:text-magenta md:py-0"
+        className="py-1.5 font-mono text-[0.68rem] font-bold uppercase tracking-wider text-text no-underline hover:text-primary md:py-0"
       >
         {open ? "Close profile editor ✕" : "Edit profile →"}
       </button>
@@ -184,7 +184,7 @@ function EditProfile({
           </label>
 
           {error && (
-            <p className="border-2 border-ink bg-surface2 px-3 py-2 font-mono text-xs text-orange">
+            <p className="border-2 border-ink bg-surface2 px-3 py-2 font-mono text-xs text-secondary">
               {error}
             </p>
           )}
@@ -356,7 +356,7 @@ function SignInUpFlow({
         </label>
 
         {error && (
-          <p className="border-2 border-ink bg-surface2 px-3 py-2 font-mono text-xs text-orange">
+          <p className="border-2 border-ink bg-surface2 px-3 py-2 font-mono text-xs text-secondary">
             {error}
           </p>
         )}
@@ -380,7 +380,7 @@ function SignInUpFlow({
           type="button"
           disabled={busy}
           onClick={sendMagicLink}
-          className="py-1.5 font-mono text-[0.68rem] font-bold uppercase tracking-wider text-ink no-underline hover:text-magenta md:py-0"
+          className="py-1.5 font-mono text-[0.68rem] font-bold uppercase tracking-wider text-text no-underline hover:text-primary md:py-0"
         >
           Or send a magic link →
         </button>

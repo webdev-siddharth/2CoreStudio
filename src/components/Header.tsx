@@ -28,10 +28,10 @@ export function Header({
       <div className="mx-auto grid max-w-6xl grid-cols-[1fr_auto_1fr] items-center gap-4">
         <Link
           href="/"
-          className="logo justify-self-start text-[1.4rem] leading-none text-ink no-underline"
+          className="logo justify-self-start text-[1.4rem] leading-none text-text no-underline"
           onClick={() => setMenuOpen(false)}
         >
-          2CORE<span className="text-magenta">STUDIO</span>
+          2CORE<span className="text-primary">STUDIO</span>
         </Link>
 
         <nav className="hidden items-center gap-3 md:flex" aria-label="Main">
@@ -39,8 +39,8 @@ export function Header({
             <Link
               key={link.label}
               href={link.href}
-              className={`cursor-pointer border-[3px] border-ink bg-surface px-3 py-2 font-mono text-[0.7rem] font-bold uppercase tracking-wider text-ink no-underline shadow-[4px_4px_0_var(--ink)] transition-transform duration-75 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-surface2 hover:text-magenta active:translate-x-1 active:translate-y-1 active:shadow-none ${
-                pathname.startsWith(link.match) ? "border-magenta" : ""
+              className={`cursor-pointer border-[3px] border-ink bg-surface px-3 py-2 font-mono text-[0.7rem] font-bold uppercase tracking-wider text-text no-underline shadow-[4px_4px_0_var(--ink)] transition-transform duration-75 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-surface2 hover:text-primary active:translate-x-1 active:translate-y-1 active:shadow-none ${
+                pathname.startsWith(link.match) ? "border-primary" : ""
               }`}
             >
               {link.label}
@@ -58,7 +58,7 @@ export function Header({
             onClick={() => setMenuOpen((open) => !open)}
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
-            className="cursor-pointer border-[3px] border-ink bg-surface px-2.5 py-1.5 text-ink shadow-[4px_4px_0_var(--ink)] transition-transform duration-75 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-surface2 hover:text-magenta active:translate-x-1 active:translate-y-1 active:shadow-none md:hidden"
+            className="cursor-pointer border-[3px] border-ink bg-surface px-2.5 py-1.5 text-text shadow-[4px_4px_0_var(--ink)] transition-transform duration-75 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-surface2 hover:text-primary active:translate-x-1 active:translate-y-1 active:shadow-none md:hidden"
           >
             <span className="font-mono text-sm font-bold leading-none">
               {menuOpen ? "✕" : "☰"}
@@ -77,8 +77,8 @@ export function Header({
               key={link.label}
               href={link.href}
               onClick={() => setMenuOpen(false)}
-              className={`cursor-pointer border-[3px] border-ink bg-surface px-3 py-2 font-mono text-[0.82rem] font-bold uppercase tracking-wider text-ink no-underline shadow-[4px_4px_0_var(--ink)] transition-transform duration-75 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-surface2 hover:text-magenta active:translate-x-1 active:translate-y-1 active:shadow-none ${
-                pathname.startsWith(link.match) ? "border-magenta" : ""
+              className={`cursor-pointer border-[3px] border-ink bg-surface px-3 py-2 font-mono text-[0.82rem] font-bold uppercase tracking-wider text-text no-underline shadow-[4px_4px_0_var(--ink)] transition-transform duration-75 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-surface2 hover:text-primary active:translate-x-1 active:translate-y-1 active:shadow-none ${
+                pathname.startsWith(link.match) ? "border-primary" : ""
               }`}
             >
               {link.label}

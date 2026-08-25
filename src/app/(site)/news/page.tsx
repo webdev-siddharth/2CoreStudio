@@ -54,10 +54,10 @@ export default async function NewsPage() {
       <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted">
         2coreStudio
       </p>
-      <h1 className="display mt-3 text-4xl text-ink sm:text-5xl">
-        NEWS <span className="text-magenta">/</span> BLOG
+      <h1 className="display mt-3 text-4xl text-text sm:text-5xl">
+        NEWS <span className="text-primary">/</span> BLOG
       </h1>
-      <p className="mt-4 max-w-2xl font-mono text-sm leading-relaxed text-ink">
+      <p className="mt-4 max-w-2xl font-mono text-sm leading-relaxed text-text">
         Release notes, launch announcements and studio updates.
       </p>
 
@@ -86,7 +86,7 @@ export default async function NewsPage() {
                   <p className="font-mono text-[0.65rem] uppercase tracking-widest text-muted">
                     {formatDate(post.published_at ?? post.created_at)}
                   </p>
-                  <h2 className="display mt-2 text-lg text-ink">
+                  <h2 className="display mt-2 text-lg text-text">
                     {post.title}
                   </h2>
                   {post.excerpt && (
@@ -94,7 +94,7 @@ export default async function NewsPage() {
                       {post.excerpt}
                     </p>
                   )}
-                  <p className="mt-4 inline-block font-mono text-[0.68rem] font-bold uppercase tracking-wider text-magenta">
+                  <p className="mt-4 inline-block font-mono text-[0.68rem] font-bold uppercase tracking-wider text-primary">
                     Read post →
                   </p>
                 </Link>

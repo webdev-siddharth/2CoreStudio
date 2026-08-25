@@ -40,11 +40,11 @@ function select(name: string, options: string[], className = "") {
 
 function check(name: string, label: string) {
   return (
-    <label className="flex cursor-pointer items-center gap-2 font-mono text-[0.68rem] font-bold uppercase tracking-wider text-ink">
+    <label className="flex cursor-pointer items-center gap-2 font-mono text-[0.68rem] font-bold uppercase tracking-wider text-text">
       <input
         type="checkbox"
         name={name}
-        className="h-4 w-4 accent-[var(--magenta)]"
+        className="h-4 w-4 accent-[var(--primary)]"
       />
       {label}
     </label>
@@ -67,14 +67,14 @@ export default function NewAppPage() {
     <div className="mx-auto max-w-6xl px-5 py-10">
       <Link
         href="/admin/apps"
-        className="py-1 font-mono text-[0.68rem] font-bold uppercase tracking-wider text-ink no-underline hover:text-magenta md:py-0"
+        className="py-1 font-mono text-[0.68rem] font-bold uppercase tracking-wider text-text no-underline hover:text-primary md:py-0"
       >
         ← Back to apps
       </Link>
-      <h1 className="display mt-3 text-2xl text-ink">NEW APP</h1>
+      <h1 className="display mt-3 text-2xl text-text">NEW APP</h1>
 
       {error && (
-        <p className="mt-3 border-2 border-ink bg-surface2 px-3 py-2 font-mono text-xs text-orange">
+        <p className="mt-3 border-2 border-ink bg-surface2 px-3 py-2 font-mono text-xs text-secondary">
           {error}
         </p>
       )}

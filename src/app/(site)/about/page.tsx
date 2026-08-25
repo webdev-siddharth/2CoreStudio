@@ -77,13 +77,13 @@ const TEAM = [
     initials: "2C",
     name: "Founder",
     role: "Lead builder",
-    tint: "bg-magenta",
+    tint: "bg-primary",
   },
   {
     initials: "??",
     name: "Roster",
     role: "Expanding soon",
-    tint: "bg-orange",
+    tint: "bg-secondary",
   },
 ];
 
@@ -99,7 +99,7 @@ function SectionHeading({
       <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted">
         {kicker}
       </p>
-      <h2 className="display mt-3 text-3xl text-ink sm:text-4xl">{title}</h2>
+      <h2 className="display mt-3 text-3xl text-text sm:text-4xl">{title}</h2>
     </Reveal>
   );
 }
@@ -111,10 +111,10 @@ export default function AboutPage() {
         <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted">
           2coreStudio
         </p>
-        <h1 className="display mt-3 text-4xl text-ink sm:text-5xl">
-          ABOUT <span className="text-magenta">/</span> THE STUDIO
+        <h1 className="display mt-3 text-4xl text-text sm:text-5xl">
+          ABOUT <span className="text-primary">/</span> THE STUDIO
         </h1>
-        <p className="mt-4 max-w-2xl font-mono text-sm leading-relaxed text-ink">
+        <p className="mt-4 max-w-2xl font-mono text-sm leading-relaxed text-text">
           The studio behind the software — fast, cross-platform apps for web,
           Windows, Mac, Android, iOS and Linux, made by an independent team
           that ships with speed and soul.
@@ -128,7 +128,7 @@ export default function AboutPage() {
             <span className="nb-tag nb-tag--a absolute -top-3 -left-3">
               The story
             </span>
-            <p className="display text-base text-ink">
+            <p className="display text-base text-text">
               Built because good software shouldn&apos;t be locked to one
               platform
             </p>
@@ -161,10 +161,10 @@ export default function AboutPage() {
           {VALUES.map((value, i) => (
             <Reveal key={value.title} delay={i * 80}>
               <div className="nb-card flex h-full flex-col">
-                <div className="mb-4 grid h-12 w-12 place-items-center border-[3px] border-ink bg-surface2 text-2xl text-magenta shadow-[3px_3px_0_var(--ink)]">
+                <div className="mb-4 grid h-12 w-12 place-items-center border-[3px] border-ink bg-surface2 text-2xl text-primary shadow-[3px_3px_0_var(--ink)]">
                   {value.glyph}
                 </div>
-                <h3 className="display text-base text-ink">{value.title}</h3>
+                <h3 className="display text-base text-text">{value.title}</h3>
                 <p className="mt-2 text-[0.78rem] leading-relaxed text-muted">
                   {value.body}
                 </p>
@@ -187,11 +187,11 @@ export default function AboutPage() {
                 <Icon
                   className={`h-10 w-10 transition-transform duration-200 group-hover:-rotate-6 group-hover:scale-110 ${
                     i % 2 === 0
-                      ? "text-magenta group-hover:text-orange"
-                      : "text-orange group-hover:text-magenta"
+                      ? "text-primary group-hover:text-secondary"
+                      : "text-secondary group-hover:text-primary"
                   }`}
                 />
-                <p className="font-mono text-[0.68rem] font-bold uppercase tracking-widest text-ink">
+                <p className="font-mono text-[0.68rem] font-bold uppercase tracking-widest text-text">
                   {name}
                 </p>
               </div>
@@ -215,7 +215,7 @@ export default function AboutPage() {
                 <p className="font-mono text-[0.62rem] uppercase tracking-widest text-muted">
                   {milestone.label}
                 </p>
-                <h3 className="display mt-2 text-base text-ink">
+                <h3 className="display mt-2 text-base text-text">
                   {milestone.title}
                 </h3>
                 <p className="mt-2 text-[0.78rem] leading-relaxed text-muted">
@@ -232,7 +232,7 @@ export default function AboutPage() {
               <div className="nb-card grid h-full place-items-center py-6 text-center">
                 <p
                   className={`display text-5xl ${
-                    i % 2 === 0 ? "text-magenta" : "text-orange"
+                    i % 2 === 0 ? "text-primary" : "text-secondary"
                   }`}
                 >
                   {stat.value}
@@ -251,17 +251,17 @@ export default function AboutPage() {
         aria-label="Independence"
         className="relative left-1/2 mt-14 w-[100vw] -translate-x-1/2"
       >
-        <div className="bg-[repeating-linear-gradient(45deg,var(--magenta),var(--magenta)_10px,var(--orange)_10px,var(--orange)_20px)] py-7">
+        <div className="bg-[repeating-linear-gradient(45deg,var(--primary),var(--primary)_10px,var(--secondary)_10px,var(--secondary)_20px)] py-7">
           <div className="mx-auto max-w-6xl px-5">
             <Reveal>
               <div className="border-[3px] border-ink bg-bg px-6 py-12 text-center shadow-[8px_8px_0_var(--ink)] sm:px-10">
                 <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted">
                   No shortcuts
                 </p>
-                <h2 className="display mt-3 text-3xl text-ink sm:text-4xl">
+                <h2 className="display mt-3 text-3xl text-text sm:text-4xl">
                   Proudly independent
                 </h2>
-                <p className="mx-auto mt-4 max-w-xl font-mono text-sm leading-relaxed text-ink">
+                <p className="mx-auto mt-4 max-w-xl font-mono text-sm leading-relaxed text-text">
                   No investors to please, no subscription walls, no bloatware.
                   Software that stays free to try and earns its place by being
                   worth it.
@@ -284,7 +284,7 @@ export default function AboutPage() {
                 >
                   {member.initials}
                 </div>
-                <h3 className="display mt-4 text-lg text-ink">{member.name}</h3>
+                <h3 className="display mt-4 text-lg text-text">{member.name}</h3>
                 <p className="font-mono text-[0.68rem] uppercase tracking-widest text-muted">
                   {member.role}
                 </p>
@@ -300,17 +300,17 @@ export default function AboutPage() {
 
       {/* CTA */}
       <section aria-label="Get started" className="relative left-1/2 mt-14 w-[100vw] -translate-x-1/2">
-        <div className="bg-[repeating-linear-gradient(45deg,var(--magenta),var(--magenta)_10px,var(--orange)_10px,var(--orange)_20px)] py-7">
+        <div className="bg-[repeating-linear-gradient(45deg,var(--primary),var(--primary)_10px,var(--secondary)_10px,var(--secondary)_20px)] py-7">
           <div className="mx-auto max-w-6xl px-5">
             <Reveal>
               <div className="border-[3px] border-ink bg-surface px-6 py-12 text-center shadow-[8px_8px_0_var(--ink)] sm:px-10">
                 <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted">
                   Start here
                 </p>
-                <h2 className="display mt-3 text-4xl text-ink sm:text-5xl">
+                <h2 className="display mt-3 text-4xl text-text sm:text-5xl">
                   The catalog is open
                 </h2>
-                <p className="mx-auto mt-4 max-w-xl font-mono text-sm leading-relaxed text-ink">
+                <p className="mx-auto mt-4 max-w-xl font-mono text-sm leading-relaxed text-text">
                   Web, Windows, Mac, Android, iOS, Linux — pick a platform,
                   grab an app, start now.
                 </p>

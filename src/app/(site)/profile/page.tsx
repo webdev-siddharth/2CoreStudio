@@ -58,14 +58,14 @@ export default async function ProfilePage({
 
   return (
     <div className="mx-auto max-w-md px-5 py-14">
-      <h1 className="display text-3xl text-ink">PROFILE</h1>
+      <h1 className="display text-3xl text-text">PROFILE</h1>
       <p className="mt-2 mb-8 font-mono text-xs uppercase tracking-widest text-muted">
         {user ? "Your account" : "Sign in or create an account"}
       </p>
 
       {error && (
         <div className="mb-6 border-[3px] border-ink bg-surface p-4 shadow-[4px_4px_0_var(--ink)]">
-          <p className="font-mono text-xs font-bold text-orange">
+          <p className="font-mono text-xs font-bold text-secondary">
             Sign-in failed — try again or use a magic link.
           </p>
         </div>

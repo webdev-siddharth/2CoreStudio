@@ -4,22 +4,24 @@
  */
 export const themes = {
   dark: {
-    bg: "#1A1428",
-    surface: "#241B38",
-    surface2: "#2D2244",
-    ink: "#EDE6F5",
-    magenta: "#FF4FA0",
-    orange: "#FFA05C",
-    muted: "#B3A4CC",
+    background: "#232321",
+    surface: "#292929",
+    surface2: "#333333",
+    primary: "#FFD23F",
+    secondary: "#3155D9",
+    text: "#F5F1E8",
+    mutedText: "#C5C0B7",
+    ink: "#0A0A0A",
   },
   light: {
-    bg: "#F0E9F7",
+    background: "#FFF9E8",
     surface: "#FFFFFF",
-    surface2: "#F7F0FC",
-    ink: "#241B38",
-    magenta: "#D81B72",
-    orange: "#D9720E",
-    muted: "#7A6B92",
+    surface2: "#F2EEDC",
+    primary: "#FFD23F",
+    secondary: "#3155D9",
+    text: "#151515",
+    mutedText: "#595959",
+    ink: "#151515",
   },
 } as const;
 

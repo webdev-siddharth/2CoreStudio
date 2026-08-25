@@ -43,7 +43,7 @@ export default async function AppsPage({
 
   return (
     <div className="mx-auto max-w-6xl px-5 py-10">
-      <h1 className="display text-3xl text-ink">ALL SOFTWARE</h1>
+      <h1 className="display text-3xl text-text">ALL SOFTWARE</h1>
       <p className="mt-2 mb-8 font-mono text-xs uppercase tracking-widest text-muted">
         Web · Windows · Mac · Android · iOS · Linux
       </p>

@@ -1,57 +1,62 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------ */
-/* 2coreStudio — Neo-brutalist / Arcade Marquee theme                  */
+/* 2coreStudio — Yellow + Ultramarine (Neo-brutalist) theme            */
 /* Tokens live on <html data-theme="dark|light"> — swapped at runtime  */
 /* by ThemeProvider. Utilities map through @theme inline so Tailwind   */
-/* classes (bg-bg, text-ink, border-ink, bg-magenta, ...) follow the   */
+/* classes (bg-bg, text-ink, border-ink, bg-primary, ...) follow the   */
 /* active theme.                                                       */
 /* ------------------------------------------------------------------ */
 
 :root,
 html[data-theme="dark"] {
-  --bg: #1a1428;
-  --surface: #241b38;
-  --surface2: #2d2244;
-  --ink: #ede6f5;
-  --magenta: #ff4fa0;
-  --orange: #ffa05c;
+  --background: #232321;
+  --surface: #292929;
+  --surface2: #333333;
+  --primary: #FFD23F;
+  --secondary: #3155D9;
+  --text: #F5F1E8;
+  --muted-text: #C5C0B7;
+  --ink: #0A0A0A;
   --green: #3fb950;
   --red: #ff5c5c;
-  --muted: #b3a4cc;
 }
 
 html[data-theme="light"] {
-  --bg: #f0e9f7;
-  --surface: #ffffff;
-  --surface2: #f7f0fc;
-  --ink: #241b38;
-  --magenta: #d81b72;
-  --orange: #d9720e;
+  --background: #FFF9E8;
+  --surface: #FFFFFF;
+  --surface2: #F2EEDC;
+  --primary: #FFD23F;
+  --secondary: #3155D9;
+  --text: #151515;
+  --muted-text: #595959;
+  --ink: #151515;
   --green: #1f7a33;
   --red: #c92a2a;
-  --muted: #7a6b92;
 }
 
 @theme inline {
-  --color-bg: var(--bg);
+  --color-bg: var(--background);
   --color-surface: var(--surface);
   --color-surface2: var(--surface2);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-text: var(--text);
+  --color-muted: var(--muted-text);
   --color-ink: var(--ink);
-  --color-magenta: var(--magenta);
-  --color-orange: var(--orange);
-  --color-muted: var(--muted);
+  --color-green: var(--green);
+  --color-red: var(--red);
   --font-display: var(--font-archivo);
   --font-mono: var(--font-space-mono);
 }
 
 html {
-  background: var(--bg);
+  background: var(--background);
 }
 
 body {
-  background: var(--bg);
-  color: var(--ink);
+  background: var(--background);
+  color: var(--text);
   font-family: var(--font-space-mono), ui-monospace, monospace;
   transition:
     background 0.2s,
@@ -70,14 +75,14 @@ body {
   letter-spacing: -0.01em;
   background: linear-gradient(
     to right,
-    var(--ink),
-    var(--magenta),
-    var(--ink)
+    var(--text),
+    var(--primary),
+    var(--text)
   );
   background-size: 200% 100%;
   -webkit-background-clip: text;
   background-clip: text;
-  color: var(--ink);
+  color: var(--text);
   transition:
     color 0.2s ease-in-out,
     text-decoration-color 0.2s ease-in-out;
@@ -87,7 +92,7 @@ body {
 .logo:hover {
   color: transparent;
   text-decoration: underline;
-  text-decoration-color: var(--ink);
+  text-decoration-color: var(--text);
   text-decoration-thickness: 1px;
   text-underline-offset: 5px;
 }
@@ -121,8 +126,8 @@ body {
 .nb-btn {
   display: inline-block;
   border: 3px solid var(--ink);
-  background: var(--magenta);
-  color: var(--bg);
+  background: var(--primary);
+  color: var(--ink);
   font-family: var(--font-archivo), sans-serif;
   font-size: 0.75rem;
   padding: 10px 16px;
@@ -143,25 +148,21 @@ body {
 }
 
 .nb-btn:focus-visible {
-  outline: 3px dashed var(--orange);
+  outline: 3px dashed var(--secondary);
   outline-offset: 3px;
 }
 
 .nb-btn--secondary {
-  background: var(--surface2);
-  color: var(--ink);
-}
-
-.nb-btn--orange {
-  background: var(--orange);
+  background: var(--secondary);
+  color: var(--text);
 }
 
 .nb-btn--disabled,
 .nb-btn:disabled {
   opacity: 0.55;
   cursor: not-allowed;
-  box-shadow: 5px 5px 0 var(--muted);
-  border-color: var(--muted);
+  box-shadow: 5px 5px 0 var(--muted-text);
+  border-color: var(--muted-text);
 }
 
 .nb-card {
@@ -200,7 +201,7 @@ body {
 .nb-chip {
   border: 3px solid var(--ink);
   background: var(--surface);
-  color: var(--ink);
+  color: var(--text);
   padding: 7px 14px;
   font-size: 0.68rem;
   font-weight: 700;
@@ -222,8 +223,8 @@ body {
 }
 
 .nb-chip--on {
-  background: var(--orange);
-  color: var(--bg);
+  background: var(--secondary);
+  color: var(--text);
 }
 
 .nb-tag {
@@ -237,13 +238,13 @@ body {
 }
 
 .nb-tag--a {
-  background: var(--magenta);
-  color: var(--bg);
+  background: var(--primary);
+  color: var(--ink);
 }
 
 .nb-tag--b {
-  background: var(--orange);
-  color: var(--bg);
+  background: var(--secondary);
+  color: var(--text);
 }
 
 .nb-status {
@@ -258,25 +259,25 @@ body {
 
 .nb-status--published {
   background: var(--green);
-  color: var(--bg);
+  color: var(--text);
 }
 
 .nb-status--draft {
-  background: var(--orange);
-  color: var(--bg);
+  background: var(--secondary);
+  color: var(--text);
 }
 
 .nb-status--unpublished {
   background: var(--red);
-  color: var(--bg);
+  color: var(--text);
 }
 
 .nb-badge-corner {
   position: absolute;
   top: -12px;
   right: -12px;
-  background: var(--orange);
-  color: var(--bg);
+  background: var(--secondary);
+  color: var(--text);
   border: 3px solid var(--ink);
   font-family: var(--font-archivo), sans-serif;
   font-size: 0.62rem;
@@ -288,7 +289,7 @@ body {
 .nb-input {
   border: 3px solid var(--ink);
   background: var(--surface);
-  color: var(--ink);
+  color: var(--text);
   padding: 9px 12px;
   font-family: var(--font-space-mono), monospace;
   font-size: 0.78rem;
@@ -297,11 +298,11 @@ body {
 }
 
 .nb-input:focus {
-  border-color: var(--magenta);
+  border-color: var(--primary);
 }
 
 .nb-input::placeholder {
-  color: var(--muted);
+  color: var(--muted-text);
 }
 
 .field-label {
@@ -312,7 +313,7 @@ body {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--muted);
+  color: var(--muted-text);
 }
 
 /* ---------------------------------------------------------------- */
@@ -323,7 +324,7 @@ body {
   border-bottom: 3px solid var(--ink);
   overflow: hidden;
   white-space: nowrap;
-  background: var(--magenta);
+  background: var(--primary);
 }
 
 .marquee-track {
@@ -342,12 +343,12 @@ body {
   padding: 8px 22px;
   font-family: var(--font-archivo), sans-serif;
   font-size: 0.85rem;
-  color: var(--bg);
+  color: var(--ink);
   border-right: 3px solid var(--ink);
 }
 
 .marquee-item:nth-child(even) {
-  background: var(--orange);
+  background: var(--secondary);
 }
 
 @keyframes marquee-scroll {
@@ -385,6 +386,42 @@ body {
   .tilt-card {
     transform: none !important;
     transition: none;
+  }
+}
+
+/* ---------------------------------------------------------------- */
+/* Spotlight card — follows cursor with a yellow glow                 */
+/* ---------------------------------------------------------------- */
+
+.card-spotlight {
+  position: relative;
+  overflow: hidden;
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+}
+
+.card-spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at var(--mouse-x) var(--mouse-y),
+    rgba(255, 210, 63, 0.15),
+    transparent 80%
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.card-spotlight:hover::before {
+  opacity: 0.6;
+}
+
+@media (hover: none) {
+  .card-spotlight::before {
+    display: none;
   }
 }
 

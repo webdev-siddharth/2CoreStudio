@@ -53,12 +53,12 @@ function select(
 
 function check(name: string, checked: boolean, label: string) {
   return (
-    <label className="flex cursor-pointer items-center gap-2 font-mono text-[0.68rem] font-bold uppercase tracking-wider text-ink">
+    <label className="flex cursor-pointer items-center gap-2 font-mono text-[0.68rem] font-bold uppercase tracking-wider text-text">
       <input
         type="checkbox"
         name={name}
         defaultChecked={checked}
-        className="h-4 w-4 accent-[var(--magenta)]"
+        className="h-4 w-4 accent-[var(--primary)]"
       />
       {label}
     </label>
@@ -68,7 +68,7 @@ function check(name: string, checked: boolean, label: string) {
 function ErrorNote({ error }: { error: string | null }) {
   if (!error) return null;
   return (
-    <p className="mt-3 border-2 border-ink bg-surface2 px-3 py-2 font-mono text-xs text-orange">
+    <p className="mt-3 border-2 border-ink bg-surface2 px-3 py-2 font-mono text-xs text-secondary">
       {error}
     </p>
   );
@@ -100,13 +100,13 @@ export function AppEditForm({ app }: { app: AppWithPlatforms }) {
     <div className="mx-auto max-w-6xl px-5 py-10">
       <Link
         href="/admin/apps"
-        className="py-1 font-mono text-[0.68rem] font-bold uppercase tracking-wider text-ink no-underline hover:text-magenta md:py-0"
+        className="py-1 font-mono text-[0.68rem] font-bold uppercase tracking-wider text-text no-underline hover:text-primary md:py-0"
       >
         ← Back to apps
       </Link>
 
       <div className="mt-3 flex flex-wrap items-center gap-3">
-        <h1 className="display text-2xl text-ink">EDIT APP</h1>
+        <h1 className="display text-2xl text-text">EDIT APP</h1>
         <span className={`nb-status ${status.className}`}>{status.label}</span>
       </div>
       <p className="mt-1 font-mono text-xs uppercase tracking-widest text-muted">
@@ -236,7 +236,7 @@ export function AppEditForm({ app }: { app: AppWithPlatforms }) {
               className="flex flex-wrap items-center gap-3 border-2 border-ink bg-surface2 px-3 py-2"
             >
               <span className="nb-tag nb-tag--b">{platform.platform}</span>
-              <span className="min-w-0 flex-1 truncate font-mono text-[0.7rem] text-ink">
+              <span className="min-w-0 flex-1 truncate font-mono text-[0.7rem] text-text">
                 {platform.url}
               </span>
               {platform.version && (

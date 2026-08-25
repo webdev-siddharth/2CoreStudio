@@ -51,7 +51,7 @@ export async function HomeNewsTeaser() {
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted">
             News
           </p>
-          <h2 className="display mt-3 text-3xl text-ink sm:text-4xl">
+          <h2 className="display mt-3 text-3xl text-text sm:text-4xl">
             Latest from the studio
           </h2>
         </Reveal>
@@ -63,18 +63,18 @@ export async function HomeNewsTeaser() {
                 className="nb-card block no-underline transition-transform duration-75 hover:-translate-y-0.5"
               >
                 <div className="flex items-center gap-4">
-                  <span className="grid h-10 w-10 shrink-0 place-items-center border-[3px] border-ink bg-surface2 font-mono text-sm font-bold text-magenta shadow-[3px_3px_0_var(--ink)]">
+                  <span className="grid h-10 w-10 shrink-0 place-items-center border-[3px] border-ink bg-surface2 font-mono text-sm font-bold text-primary shadow-[3px_3px_0_var(--ink)]">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <div className="min-w-0">
-                    <h3 className="display truncate text-lg text-ink">
+                    <h3 className="display truncate text-lg text-text">
                       {post.title}
                     </h3>
                     <p className="mt-1 font-mono text-[0.65rem] uppercase tracking-widest text-muted">
                       {formatDate(post.published_at ?? post.created_at)}
                     </p>
                   </div>
-                  <span className="ml-auto hidden shrink-0 font-mono text-[0.68rem] font-bold uppercase tracking-wider text-magenta sm:inline-block">
+                  <span className="ml-auto hidden shrink-0 font-mono text-[0.68rem] font-bold uppercase tracking-wider text-primary sm:inline-block">
                     Read more →
                   </span>
                 </div>

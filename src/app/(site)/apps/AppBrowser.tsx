@@ -108,7 +108,7 @@ export function AppBrowser({
 
       {filtered.length === 0 ? (
         <div className="nb-card py-16 text-center">
-          <p className="display text-lg text-ink">NOTHING FOUND</p>
+          <p className="display text-lg text-text">NOTHING FOUND</p>
           <p className="mt-3 font-mono text-xs text-muted">
             No apps match the current filters. Try widening the search.
           </p>
