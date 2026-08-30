@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import DownloadButton from "@/components/DownloadButton";
+import { MarkdownBody } from "@/components/news/MarkdownBody";
 import { ViewTracker } from "@/components/ViewTracker";
 import { ACCESS_TIER_LABELS } from "@/components/AppCard";
+import { PLATFORM_LABELS } from "@/lib/platform";
 import { createClient } from "@/lib/supabase/server";
 import {
   isUnconfiguredSupabase,
@@ -12,15 +15,6 @@ import {
 import type { AppWithPlatforms, Platform } from "@/lib/types";
 
 export const dynamic = "force-dynamic";
-
-const PLATFORM_LABELS: Record<Platform, string> = {
-  web: "Web",
-  windows: "Windows",
-  mac: "macOS",
-  android: "Android",
-  ios: "iOS",
-  linux: "Linux",
-};
 
 async function getApp(slug: string): Promise<AppWithPlatforms | null> {
   if (isUnconfiguredSupabase()) return null;
@@ -76,11 +70,6 @@ export default async function AppDetailPage({
 
   if (!app) notFound();
 
-  const bodyParagraphs = (app.detailed_body ?? "")
-    .split("\n")
-    .map((p) => p.trim())
-    .filter(Boolean);
-
   return (
     <article>
       <ViewTracker appId={app.id} />
@@ -117,21 +106,25 @@ export default async function AppDetailPage({
             </span>
             {app.is_premium && <span className="nb-tag nb-tag--a">Premium</span>}
           </div>
+          {app.thumbnail_url && (
+            <Image
+              src={app.thumbnail_url}
+              alt={`${app.title} thumbnail`}
+              width={64}
+              height={64}
+              className="mt-6 h-16 w-16 border-[3px] border-ink object-cover shadow-[4px_4px_0_var(--ink)]"
+              unoptimized
+            />
+          )}
         </div>
       </section>
 
       <section className="mx-auto grid max-w-6xl gap-10 px-5 py-12 lg:grid-cols-[1fr_340px]">
         {/* Body */}
         <div>
-          {bodyParagraphs.length > 0 ? (
-            <div className="space-y-4">
-              {bodyParagraphs.map((p, i) => (
-                <p key={i} className="font-mono text-sm leading-relaxed text-text">
-                  {p}
-                </p>
-              ))}
-            </div>
-          ) : null}
+          {app.detailed_body && (
+            <MarkdownBody content={app.detailed_body} />
+          )}
 
           {app.youtube_embed_id && (
             <div className="mt-10 border-[3px] border-ink bg-surface p-2 shadow-[6px_6px_0_var(--ink)]">
@@ -147,9 +140,11 @@ export default async function AppDetailPage({
               </div>
             </div>
           )}
+        </div>
 
-          {/* Platform table */}
-          <div className="mt-10">
+        {/* Sidebar */}
+        <aside className="lg:pt-2">
+          <div className="nb-card">
             <h2 className="display mb-4 text-lg text-text">AVAILABLE ON</h2>
             {app.app_platforms.length === 0 ? (
               <p className="font-mono text-xs text-muted">
@@ -182,11 +177,8 @@ export default async function AppDetailPage({
               </ul>
             )}
           </div>
-        </div>
 
-        {/* Sidebar */}
-        <aside className="lg:pt-2">
-          <div className="nb-card">
+          <div className="nb-card mt-4">
             <h2 className="display mb-4 text-base text-text">GET THE APP</h2>
             <DownloadButton
               appId={app.id}
@@ -203,6 +195,16 @@ export default async function AppDetailPage({
                 platform.
               </p>
             )}
+            {app.github_url && (
+              <a
+                href={app.github_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 block font-mono text-[0.65rem] font-bold text-muted hover:text-primary underline"
+              >
+                See all releases →
+              </a>
+            )}
             <Link
               href="/apps"
               className="mt-5 inline-block py-1 font-mono text-[0.68rem] font-bold uppercase tracking-wider text-text no-underline hover:text-primary md:py-0"
@@ -210,6 +212,35 @@ export default async function AppDetailPage({
               ← Back to catalog
             </Link>
           </div>
+
+          {app.app_platforms.some((p) => p.changelog) && (
+            <div className="nb-card mt-4">
+              <h2 className="display mb-3 text-base text-text">WHAT&apos;S NEW</h2>
+              <ul className="space-y-2">
+                {app.app_platforms
+                  .filter((p) => p.changelog)
+                  .map((platform) => (
+                    <li
+                      key={platform.id}
+                      className="border-2 border-ink bg-surface2 px-3 py-2"
+                    >
+                      <span className="nb-tag nb-tag--b">
+                        {PLATFORM_LABELS[platform.platform as Platform] ??
+                          platform.platform}
+                      </span>
+                      {platform.version && (
+                        <span className="ml-2 font-mono text-[0.65rem] text-muted">
+                          v{platform.version}
+                        </span>
+                      )}
+                      <div className="mt-1 font-mono text-[0.7rem] leading-relaxed text-text">
+                        <MarkdownBody content={platform.changelog ?? ""} />
+                      </div>
+                    </li>
+                  ))}
+              </ul>
+            </div>
+          )}
         </aside>
       </section>
     </article>

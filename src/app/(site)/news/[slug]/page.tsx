@@ -7,6 +7,7 @@ import {
   withTimeout,
 } from "@/lib/supabase/fetch-guard";
 import type { PostRow } from "@/lib/types";
+import { MarkdownBody } from "@/components/news/MarkdownBody";
 
 export const dynamic = "force-dynamic";
 
@@ -44,11 +45,11 @@ export async function generateMetadata({
   if (!post) return { title: "Post not found" };
 
   return {
-    title: post.title,
-    description: post.excerpt ?? undefined,
+    title: post.seo_title || post.title,
+    description: post.seo_description || post.excerpt || undefined,
     openGraph: {
-      title: post.title,
-      description: post.excerpt ?? undefined,
+      title: post.seo_title || post.title,
+      description: post.seo_description || post.excerpt || undefined,
       images: post.cover_url ? [post.cover_url] : undefined,
     },
   };
@@ -72,11 +73,6 @@ export default async function PostDetailPage({
 
   if (!post) notFound();
 
-  const bodyParagraphs = (post.body ?? "")
-    .split("\n")
-    .map((p) => p.trim())
-    .filter(Boolean);
-
   return (
     <article>
       {/* Cover */}
@@ -93,9 +89,17 @@ export default async function PostDetailPage({
           className="absolute inset-0 bg-gradient-to-t from-bg via-bg/75 to-bg/25"
         />
         <div className="relative z-10 mx-auto max-w-6xl px-5 pb-16 pt-24 sm:pt-32">
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted">
-            {formatDate(post.published_at ?? post.created_at)}
-          </p>
+          <div className="flex flex-wrap items-center gap-2">
+            <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted">
+              {formatDate(post.published_at ?? post.created_at)}
+            </p>
+            <span className="nb-tag nb-tag--a">{post.category ?? "Update"}</span>
+            {(post.tags ?? []).slice(0, 3).map((tag) => (
+              <span key={tag} className="nb-tag nb-tag--b">
+                {tag}
+              </span>
+            ))}
+          </div>
           <h1 className="display mt-3 max-w-3xl text-4xl text-text sm:text-6xl">
             {post.title}
           </h1>
@@ -108,14 +112,8 @@ export default async function PostDetailPage({
       </section>
 
       <section className="mx-auto max-w-3xl px-5 py-12">
-        {bodyParagraphs.length > 0 ? (
-          <div className="space-y-4">
-            {bodyParagraphs.map((p, i) => (
-              <p key={i} className="font-mono text-sm leading-relaxed text-text">
-                {p}
-              </p>
-            ))}
-          </div>
+        {post.body ? (
+          <MarkdownBody content={post.body} />
         ) : (
           <p className="font-mono text-xs text-muted">No body yet.</p>
         )}

@@ -1,33 +1,16 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
-import {
-  createPost,
-  deletePost,
-  togglePublish,
-  updatePost,
-} from "@/app/admin/posts/actions";
+import { toast } from "sonner";
+import { deletePost, togglePublish } from "@/app/admin/posts/actions";
 import { postStatus } from "@/lib/status";
 import type { PostRow } from "@/lib/types";
-
-function field(
-  name: string,
-  value: string | null | undefined,
-  className = ""
-) {
-  return (
-    <input
-      name={name}
-      defaultValue={value ?? ""}
-      className={`nb-input w-full ${className}`}
-    />
-  );
-}
 
 function ErrorNote({ error }: { error: string | null }) {
   if (!error) return null;
   return (
-    <p className="mt-3 border-2 border-ink bg-surface2 px-3 py-2 font-mono text-xs text-secondary">
+    <p className="mt-3 border-2 border-ink bg-surface2 px-3 py-2 font-mono text-xs text-red">
       {error}
     </p>
   );
@@ -43,16 +26,21 @@ function formatDate(iso: string | null): string {
 }
 
 export function AdminPostsTable({ posts }: { posts: PostRow[] }) {
-  const [editingId, setEditingId] = useState<string | null>(null);
-  const [showCreate, setShowCreate] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const run = async (action: (fd: FormData) => Promise<void>, fd: FormData) => {
+  const run = async (
+    action: (fd: FormData) => Promise<void>,
+    fd: FormData,
+    successMsg?: string
+  ) => {
     try {
       setError(null);
       await action(fd);
+      if (successMsg) toast.success(successMsg);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Action failed");
+      const msg = err instanceof Error ? err.message : "Action failed";
+      setError(msg);
+      toast.error(msg);
     }
   };
 
@@ -61,60 +49,9 @@ export function AdminPostsTable({ posts }: { posts: PostRow[] }) {
       <ErrorNote error={error} />
 
       <div className="mb-6">
-        <button
-          type="button"
-          onClick={() => setShowCreate((v) => !v)}
-          className="nb-btn nb-btn--secondary"
-        >
-          {showCreate ? "Close ✕" : "+ New post"}
-        </button>
-
-        {showCreate && (
-          <form
-            action={(fd) => run(createPost, fd)}
-            className="nb-card mt-4 grid gap-3 sm:grid-cols-2"
-          >
-            <label className="block">
-              <span className="field-label">Title *</span>
-              {field("title", "", "")}
-            </label>
-            <label className="block">
-              <span className="field-label">Slug *</span>
-              {field("slug", "", "")}
-            </label>
-            <label className="block sm:col-span-2">
-              <span className="field-label">Excerpt</span>
-              <textarea
-                name="excerpt"
-                className="nb-input w-full"
-                rows={2}
-              />
-            </label>
-            <label className="block sm:col-span-2">
-              <span className="field-label">Body (\n = paragraph)</span>
-              <textarea
-                name="body"
-                className="nb-input w-full"
-                rows={4}
-              />
-            </label>
-            <label className="block sm:col-span-2">
-              <span className="field-label">Cover URL</span>
-              {field("cover_url", "")}
-            </label>
-            <label className="flex cursor-pointer items-center gap-2 font-mono text-[0.68rem] font-bold uppercase tracking-wider text-text sm:col-span-2">
-              <input
-                type="checkbox"
-                name="is_published"
-                className="h-4 w-4 accent-[var(--primary)]"
-              />
-              Published
-            </label>
-            <button type="submit" className="nb-btn sm:col-span-2">
-              Create post
-            </button>
-          </form>
-        )}
+        <Link href="/admin/posts/new" className="nb-btn nb-btn--secondary">
+          + New post
+        </Link>
       </div>
 
       {posts.length === 0 ? (
@@ -138,6 +75,20 @@ export function AdminPostsTable({ posts }: { posts: PostRow[] }) {
                   </span>
                 </div>
 
+                <div className="flex flex-wrap gap-2">
+                  <span className="nb-tag nb-tag--a">{post.category ?? "Update"}</span>
+                  {(post.tags ?? []).slice(0, 3).map((tag) => (
+                    <span key={tag} className="nb-tag nb-tag--b">
+                      {tag}
+                    </span>
+                  ))}
+                  {(post.tags ?? []).length > 3 && (
+                    <span className="nb-tag nb-tag--b">
+                      +{(post.tags ?? []).length - 3}
+                    </span>
+                  )}
+                </div>
+
                 <dl className="space-y-1.5 font-mono text-[0.68rem] text-muted">
                   <div className="flex justify-between gap-3">
                     <dt className="uppercase tracking-wider">Last edit</dt>
@@ -153,7 +104,13 @@ export function AdminPostsTable({ posts }: { posts: PostRow[] }) {
 
                 <div className="mt-auto flex flex-wrap gap-2 border-t-[3px] border-dashed border-ink pt-3">
                   <form
-                    action={(fd) => run(togglePublish, fd)}
+                    action={(fd) =>
+                      run(
+                        togglePublish,
+                        fd,
+                        post.is_published ? "Post unpublished" : "Post published"
+                      )
+                    }
                     className="inline"
                   >
                     <input type="hidden" name="id" value={post.id} />
@@ -166,19 +123,17 @@ export function AdminPostsTable({ posts }: { posts: PostRow[] }) {
                       {post.is_published ? "Unpublish" : "Publish"}
                     </button>
                   </form>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setEditingId(editingId === post.id ? null : post.id)
-                    }
-                    className="nb-chip"
+                  <Link
+                    href={`/admin/posts/${post.id}`}
+                    className="nb-chip no-underline"
                   >
-                    {editingId === post.id ? "Close" : "Edit"}
-                  </button>
+                    Edit
+                  </Link>
                   <form
                     action={(fd) => {
-                      if (window.confirm(`Delete "${post.title}"?`))
-                        run(deletePost, fd);
+                      if (window.confirm(`Delete "${post.title}"?`)) {
+                        run(deletePost, fd, "Post deleted");
+                      }
                     }}
                     className="inline"
                   >
@@ -188,66 +143,6 @@ export function AdminPostsTable({ posts }: { posts: PostRow[] }) {
                     </button>
                   </form>
                 </div>
-
-                {editingId === post.id && (
-                  <form
-                    action={(fd) => run(updatePost, fd)}
-                    className="mt-3 grid gap-3 border-t-[3px] border-dashed border-ink pt-3 sm:grid-cols-2"
-                  >
-                    <input type="hidden" name="id" value={post.id} />
-                    <label className="block">
-                      <span className="field-label">Title *</span>
-                      {field("title", post.title)}
-                    </label>
-                    <label className="block">
-                      <span className="field-label">Slug *</span>
-                      {field("slug", post.slug)}
-                    </label>
-                    <label className="block sm:col-span-2">
-                      <span className="field-label">Excerpt</span>
-                      <textarea
-                        name="excerpt"
-                        defaultValue={post.excerpt ?? ""}
-                        className="nb-input w-full"
-                        rows={2}
-                      />
-                    </label>
-                    <label className="block sm:col-span-2">
-                      <span className="field-label">Body (\n = paragraph)</span>
-                      <textarea
-                        name="body"
-                        defaultValue={post.body ?? ""}
-                        className="nb-input w-full"
-                        rows={4}
-                      />
-                    </label>
-                    <label className="block sm:col-span-2">
-                      <span className="field-label">Cover URL</span>
-                      {field("cover_url", post.cover_url)}
-                    </label>
-                    <div className="flex flex-wrap items-center gap-4 sm:col-span-2">
-                      <label className="flex cursor-pointer items-center gap-2 font-mono text-[0.68rem] font-bold uppercase tracking-wider text-text">
-                        <input
-                          type="checkbox"
-                          name="is_published"
-                          defaultChecked={post.is_published}
-                          className="h-4 w-4 accent-[var(--primary)]"
-                        />
-                        Published
-                      </label>
-                      <span className="font-mono text-[0.65rem] text-muted">
-                        {post.is_published
-                          ? `Published ${formatDate(post.published_at)} — unpublish to hide`
-                          : post.published_at
-                            ? "Unpublished — publishing restores"
-                            : "Publishing sets the date automatically"}
-                      </span>
-                    </div>
-                    <button type="submit" className="nb-btn sm:col-span-2">
-                      Save changes
-                    </button>
-                  </form>
-                )}
               </li>
             );
           })}

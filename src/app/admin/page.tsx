@@ -95,6 +95,9 @@ export default async function AdminDashboardPage() {
         <Link href="/admin/apps/new" className="nb-btn nb-btn--secondary">
           + New app
         </Link>
+        <Link href="/admin/posts/new" className="nb-btn nb-btn--secondary">
+          + New post
+        </Link>
       </div>
 
       <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -205,7 +208,7 @@ export default async function AdminDashboardPage() {
               return (
                 <li key={post.id}>
                   <Link
-                    href="/admin/posts"
+                    href={`/admin/posts/${post.id}`}
                     className="nb-card nb-card--link block no-underline"
                   >
                     <div className="flex items-start justify-between gap-2">

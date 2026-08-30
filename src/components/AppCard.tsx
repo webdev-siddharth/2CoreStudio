@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState } from "react";
 import type { AppRow } from "@/lib/types";
@@ -50,7 +51,20 @@ export function AppCard({ app }: { app: AppRow }) {
       onPointerMove={onPointerMove}
       onPointerLeave={onPointerLeave}
     >
-      <div className="mb-3.5 h-[110px] border-[3px] border-ink bg-[repeating-linear-gradient(45deg,var(--primary),var(--primary)_10px,var(--secondary)_10px,var(--secondary)_20px)]" />
+<div className="mb-3.5 h-[110px] overflow-hidden border-[3px] border-ink">
+        {app.thumbnail_url ? (
+          <Image
+            src={app.thumbnail_url}
+            alt=""
+            width={640}
+            height={360}
+            className="h-full w-full object-cover"
+            unoptimized
+          />
+        ) : (
+          <div className="h-full w-full bg-[repeating-linear-gradient(45deg,var(--primary),var(--primary)_10px,var(--secondary)_10px,var(--secondary)_20px)]" />
+        )}
+      </div>
       <div className="card-title display text-lg text-text">{app.title}</div>
       <div className="mb-3.5 mt-2 flex gap-2">
         <span className="nb-tag nb-tag--a">{app.category}</span>

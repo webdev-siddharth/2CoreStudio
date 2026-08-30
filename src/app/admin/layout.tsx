@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { ToastProvider } from "@/components/ToastProvider";
 
 /**
  * Server-side admin gate — every route under /admin is checked here.
@@ -33,6 +34,7 @@ export default async function AdminLayout({
 
   return (
     <div className="min-h-screen">
+      <ToastProvider />
       <div className="border-b-[3px] border-ink bg-surface px-5 py-4">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3">
           <Link

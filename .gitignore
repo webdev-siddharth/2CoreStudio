@@ -66,3 +66,6 @@ cloudflare-env.d.ts
 .wrangler/
 
 .open-next-test/
+
+# stray debug artifacts (kept out of source control)
+/download-anyway-fix.png

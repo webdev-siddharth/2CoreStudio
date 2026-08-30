@@ -93,6 +93,7 @@ create table if not exists public.apps (
   product_sku text,
   is_featured boolean not null default false,
   featured_order integer not null default 0,
+  github_url text,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );

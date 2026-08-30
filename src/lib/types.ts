@@ -30,6 +30,7 @@ export interface AppRow {
   product_sku: string | null;
   is_featured: boolean;
   featured_order: number;
+  github_url: string | null;
   created_at: string;
   updated_at: string;
 }
@@ -76,6 +77,11 @@ export interface PostRow {
   excerpt: string | null;
   body: string | null;
   cover_url: string | null;
+  cover_alt: string | null;
+  category: string;
+  tags: string[];
+  seo_title: string | null;
+  seo_description: string | null;
   is_published: boolean;
   published_at: string | null;
   created_at: string;

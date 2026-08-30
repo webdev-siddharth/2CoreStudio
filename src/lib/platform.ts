@@ -1,4 +1,4 @@
-export type DetectedPlatform = "windows" | "mac" | "android" | "ios" | "web";
+export type DetectedPlatform = "windows" | "mac" | "android" | "ios" | "web" | "linux";
 
 /**
  * Client-side platform detection. Matches the visitor against the
@@ -29,4 +29,5 @@ export const PLATFORM_LABELS: Record<DetectedPlatform, string> = {
   android: "Android",
   ios: "iOS",
   web: "Web",
+  linux: "Linux",
 };

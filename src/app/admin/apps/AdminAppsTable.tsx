@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { toast } from "sonner";
 import { deleteApp, togglePublish } from "@/app/admin/apps/actions";
 import { appStatus } from "@/lib/status";
 import type { AppPlatformRow, AppWithPlatforms } from "@/lib/types";
@@ -9,7 +10,7 @@ import type { AppPlatformRow, AppWithPlatforms } from "@/lib/types";
 function ErrorNote({ error }: { error: string | null }) {
   if (!error) return null;
   return (
-    <p className="mt-3 border-2 border-ink bg-surface2 px-3 py-2 font-mono text-xs text-secondary">
+    <p className="mt-3 border-2 border-ink bg-surface2 px-3 py-2 font-mono text-xs text-red">
       {error}
     </p>
   );
@@ -37,12 +38,19 @@ function latestVersion(platforms: AppPlatformRow[]): string | null {
 export function AdminAppsTable({ apps }: { apps: AppWithPlatforms[] }) {
   const [error, setError] = useState<string | null>(null);
 
-  const run = async (action: (fd: FormData) => Promise<void>, fd: FormData) => {
+  const run = async (
+    action: (fd: FormData) => Promise<void>,
+    fd: FormData,
+    successMsg?: string
+  ) => {
     try {
       setError(null);
       await action(fd);
+      if (successMsg) toast.success(successMsg);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Action failed");
+      const msg = err instanceof Error ? err.message : "Action failed";
+      setError(msg);
+      toast.error(msg);
     }
   };
 
@@ -112,7 +120,13 @@ export function AdminAppsTable({ apps }: { apps: AppWithPlatforms[] }) {
 
                 <div className="mt-auto flex flex-wrap gap-2 border-t-[3px] border-dashed border-ink pt-3">
                   <form
-                    action={(fd) => run(togglePublish, fd)}
+                    action={(fd) =>
+                      run(
+                        togglePublish,
+                        fd,
+                        app.is_published ? "App unpublished" : "App published"
+                      )
+                    }
                     className="inline"
                   >
                     <input type="hidden" name="id" value={app.id} />
@@ -134,8 +148,9 @@ export function AdminAppsTable({ apps }: { apps: AppWithPlatforms[] }) {
                         window.confirm(
                           `Delete "${app.title}"? Platforms and events cascade.`
                         )
-                      )
-                        run(deleteApp, fd);
+                      ) {
+                        run(deleteApp, fd, "App deleted");
+                      }
                     }}
                     className="inline"
                   >
