@@ -10,7 +10,7 @@ import {
   togglePublish,
   updatePost,
 } from "@/app/admin/posts/actions";
-import { actionErrorMessage } from "@/lib/action-error";
+import { actionErrorMessage, redirectDestination } from "@/lib/action-error";
 import { postStatus } from "@/lib/status";
 import type { PostRow } from "@/lib/types";
 
@@ -84,6 +84,14 @@ export function PostEditForm({ post }: { post: PostRow }) {
       if (successMsg) toast.success(successMsg);
       return true;
     } catch (err) {
+      const dest = redirectDestination(err);
+      if (dest !== null) {
+        if (dest.startsWith("/admin")) {
+          if (successMsg) toast.success(successMsg);
+          return true;
+        }
+        return false;
+      }
       const msg = actionErrorMessage(err);
       setError(msg);
       toast.error(msg);

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { toast } from "sonner";
 import { deletePost, togglePublish } from "@/app/admin/posts/actions";
-import { actionErrorMessage } from "@/lib/action-error";
+import { actionErrorMessage, redirectDestination } from "@/lib/action-error";
 import { postStatus } from "@/lib/status";
 import type { PostRow } from "@/lib/types";
 
@@ -44,6 +44,13 @@ export function AdminPostsTable({ posts }: { posts: PostRow[] }) {
       }
       if (successMsg) toast.success(successMsg);
     } catch (err) {
+      const dest = redirectDestination(err);
+      if (dest !== null) {
+        if (dest.startsWith("/admin")) {
+          if (successMsg) toast.success(successMsg);
+        }
+        return;
+      }
       const msg = actionErrorMessage(err);
       setError(msg);
       toast.error(msg);

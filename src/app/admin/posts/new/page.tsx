@@ -6,7 +6,7 @@ import { useState } from "react";
 import Markdown from "react-markdown";
 import { toast } from "sonner";
 import { createPost } from "@/app/admin/posts/actions";
-import { actionErrorMessage } from "@/lib/action-error";
+import { actionErrorMessage, redirectDestination } from "@/lib/action-error";
 import { generateSlug } from "@/lib/slug";
 
 const CATEGORIES = [
@@ -99,6 +99,15 @@ export default function NewPostPage() {
       toast.success("Post created");
       router.push("/admin/posts");
     } catch (err) {
+      const dest = redirectDestination(err);
+      if (dest !== null) {
+        if (dest.startsWith("/admin")) {
+          toast.success("Post created");
+          return;
+        }
+        setSubmitting(false);
+        return;
+      }
       const msg = actionErrorMessage(err);
       setError(msg);
       toast.error(msg);

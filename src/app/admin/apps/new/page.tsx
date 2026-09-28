@@ -5,7 +5,7 @@ import { useRef, useState } from "react";
 import { toast } from "sonner";
 import { MarkdownBody } from "@/components/news/MarkdownBody";
 import { createApp, checkSlugUnique } from "@/app/admin/apps/actions";
-import { actionErrorMessage } from "@/lib/action-error";
+import { actionErrorMessage, redirectDestination } from "@/lib/action-error";
 import { generateSlug } from "@/lib/slug";
 
 const CATEGORIES = ["Gaming", "Utility", "SaaS"];
@@ -69,6 +69,11 @@ export default function NewAppPage() {
       }
       toast.success("App created");
     } catch (err) {
+      const dest = redirectDestination(err);
+      if (dest !== null) {
+        if (dest.startsWith("/admin")) toast.success("App created");
+        return;
+      }
       const msg = actionErrorMessage(err);
       setError(msg);
       toast.error(msg);

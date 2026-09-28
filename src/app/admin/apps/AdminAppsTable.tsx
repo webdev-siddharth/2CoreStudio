@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { toast } from "sonner";
 import { deleteApp, togglePublish } from "@/app/admin/apps/actions";
-import { actionErrorMessage } from "@/lib/action-error";
+import { actionErrorMessage, redirectDestination } from "@/lib/action-error";
 import { appStatus } from "@/lib/status";
 import type { AppPlatformRow, AppWithPlatforms } from "@/lib/types";
 
@@ -54,6 +54,13 @@ export function AdminAppsTable({ apps }: { apps: AppWithPlatforms[] }) {
       }
       if (successMsg) toast.success(successMsg);
     } catch (err) {
+      const dest = redirectDestination(err);
+      if (dest !== null) {
+        if (dest.startsWith("/admin")) {
+          if (successMsg) toast.success(successMsg);
+        }
+        return;
+      }
       const msg = actionErrorMessage(err);
       setError(msg);
       toast.error(msg);

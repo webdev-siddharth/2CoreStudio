@@ -14,7 +14,7 @@ import {
   updateApp,
   updatePlatform,
 } from "@/app/admin/apps/actions";
-import { actionErrorMessage } from "@/lib/action-error";
+import { actionErrorMessage, redirectDestination } from "@/lib/action-error";
 import { generateSlug } from "@/lib/slug";
 import { appStatus } from "@/lib/status";
 import type { AppPlatformRow, AppWithPlatforms, Platform } from "@/lib/types";
@@ -138,6 +138,14 @@ export function AppEditForm({ app }: { app: AppWithPlatforms }) {
       if (successMsg) toast.success(successMsg);
       return true;
     } catch (err) {
+      const dest = redirectDestination(err);
+      if (dest !== null) {
+        if (dest.startsWith("/admin")) {
+          if (successMsg) toast.success(successMsg);
+          return true;
+        }
+        return false;
+      }
       const msg = actionErrorMessage(err);
       setErr(msg);
       toast.error(msg);

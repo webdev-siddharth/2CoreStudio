@@ -68,8 +68,12 @@ export function ProfileClient({
           type="button"
           className="nb-btn nb-btn--secondary mt-5"
           onClick={async () => {
-            const supabase = createClient();
-            await supabase.auth.signOut();
+            try {
+              const supabase = createClient();
+              await supabase.auth.signOut();
+            } catch {
+              // keep going — navigation happens regardless
+            }
             router.push("/profile");
             router.refresh();
           }}
@@ -133,6 +137,8 @@ function EditProfile({
       }
       setSaved(true);
       onSaved();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
     } finally {
       setBusy(false);
     }
@@ -297,6 +303,8 @@ function SignInUpFlow({
         return;
       }
       setNotice("Magic link sent — check your inbox.");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
     } finally {
       setBusy(false);
     }
