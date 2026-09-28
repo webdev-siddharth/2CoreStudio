@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { toast } from "sonner";
 import { deletePost, togglePublish } from "@/app/admin/posts/actions";
+import { actionErrorMessage } from "@/lib/action-error";
 import { postStatus } from "@/lib/status";
 import type { PostRow } from "@/lib/types";
 
@@ -29,16 +30,21 @@ export function AdminPostsTable({ posts }: { posts: PostRow[] }) {
   const [error, setError] = useState<string | null>(null);
 
   const run = async (
-    action: (fd: FormData) => Promise<void>,
+    action: (fd: FormData) => Promise<string | null>,
     fd: FormData,
     successMsg?: string
   ) => {
     try {
       setError(null);
-      await action(fd);
+      const failure = await action(fd);
+      if (failure) {
+        setError(failure);
+        toast.error(failure);
+        return;
+      }
       if (successMsg) toast.success(successMsg);
     } catch (err) {
-      const msg = err instanceof Error ? err.message : "Action failed";
+      const msg = actionErrorMessage(err);
       setError(msg);
       toast.error(msg);
     }

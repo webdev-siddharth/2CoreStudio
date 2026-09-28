@@ -10,6 +10,7 @@ import {
   togglePublish,
   updatePost,
 } from "@/app/admin/posts/actions";
+import { actionErrorMessage } from "@/lib/action-error";
 import { postStatus } from "@/lib/status";
 import type { PostRow } from "@/lib/types";
 
@@ -67,19 +68,26 @@ export function PostEditForm({ post }: { post: PostRow }) {
     .filter(Boolean);
 
   const run = async (
-    action: (fd: FormData) => Promise<void>,
+    action: (fd: FormData) => Promise<string | null>,
     fd: FormData,
     successMsg?: string
-  ) => {
+  ): Promise<boolean> => {
     try {
       setError(null);
       setSubmitting(true);
-      await action(fd);
+      const failure = await action(fd);
+      if (failure) {
+        setError(failure);
+        toast.error(failure);
+        return false;
+      }
       if (successMsg) toast.success(successMsg);
+      return true;
     } catch (err) {
-      const msg = err instanceof Error ? err.message : "Action failed";
+      const msg = actionErrorMessage(err);
       setError(msg);
       toast.error(msg);
+      return false;
     } finally {
       setSubmitting(false);
     }
@@ -279,9 +287,13 @@ export function PostEditForm({ post }: { post: PostRow }) {
 
       <div className="nb-card mt-6 flex flex-wrap items-center gap-3">
         <form
-          action={(fd) =>
-            run(togglePublish, fd, post.is_published ? "Post unpublished" : "Post published")
-          }
+          action={async (fd) => {
+            await run(
+              togglePublish,
+              fd,
+              post.is_published ? "Post unpublished" : "Post published"
+            );
+          }}
           className="inline"
         >
           <input type="hidden" name="id" value={post.id} />
@@ -295,9 +307,10 @@ export function PostEditForm({ post }: { post: PostRow }) {
           </button>
         </form>
         <form
-          action={(fd) => {
+          action={async (fd) => {
             if (window.confirm(`Delete "${post.title}"?`)) {
-              run(deletePost, fd, "Post deleted").then(() => router.push("/admin/posts"));
+              const ok = await run(deletePost, fd, "Post deleted");
+              if (ok) router.push("/admin/posts");
             }
           }}
           className="inline"

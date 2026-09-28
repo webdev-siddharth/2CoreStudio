@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 import { toast } from "sonner";
 import { MarkdownBody } from "@/components/news/MarkdownBody";
 import { createApp, checkSlugUnique } from "@/app/admin/apps/actions";
+import { actionErrorMessage } from "@/lib/action-error";
 import { generateSlug } from "@/lib/slug";
 
 const CATEGORIES = ["Gaming", "Utility", "SaaS"];
@@ -60,10 +61,15 @@ export default function NewAppPage() {
         return;
       }
 
-      await createApp(fd);
+      const failure = await createApp(fd);
+      if (failure) {
+        setError(failure);
+        toast.error(failure);
+        return;
+      }
       toast.success("App created");
     } catch (err) {
-      const msg = err instanceof Error ? err.message : "Action failed";
+      const msg = actionErrorMessage(err);
       setError(msg);
       toast.error(msg);
     } finally {

@@ -21,10 +21,8 @@ function isPublished(formData: FormData): boolean {
   return formData.get("is_published") === "on";
 }
 
-function requireString(formData: FormData, key: string): string {
-  const value = str(formData, key);
-  if (!value) throw new Error("Required fields are missing.");
-  return value;
+function requireString(formData: FormData, key: string): string | null {
+  return str(formData, key) || null;
 }
 
 function parseTags(formData: FormData): string[] {
@@ -61,10 +59,11 @@ async function checkSlugUnique(
   return !data || data.length === 0;
 }
 
-export async function createPost(formData: FormData) {
+export async function createPost(formData: FormData): Promise<string | null> {
   const supabase = await requireAdmin();
   const title = requireString(formData, "title");
   const slug = requireString(formData, "slug");
+  if (!title || !slug) return "Required fields are missing.";
 
   const slugClean = slug
     .toLowerCase()
@@ -74,9 +73,9 @@ export async function createPost(formData: FormData) {
     .replace(/-+/g, "-")
     .replace(/^-|-$/g, "");
 
-  if (!slugClean) throw new Error("Slug is required.");
+  if (!slugClean) return "Slug is required.";
   if (!(await checkSlugUnique(slugClean))) {
-    throw new Error("A post with this slug already exists.");
+    return "A post with this slug already exists.";
   }
 
   const { error } = await supabase.from("posts").insert({
@@ -94,16 +93,17 @@ export async function createPost(formData: FormData) {
     published_at: isPublished(formData) ? now() : null,
   });
 
-  if (error) throw new Error(error.message);
+  if (error) return error.message;
   revalidatePost(slugClean);
   redirect("/admin/posts");
 }
 
-export async function updatePost(formData: FormData) {
+export async function updatePost(formData: FormData): Promise<string | null> {
   const supabase = await requireAdmin();
   const id = requireString(formData, "id");
   const title = requireString(formData, "title");
   const slug = requireString(formData, "slug");
+  if (!id || !title || !slug) return "Required fields are missing.";
   const wantPublished = isPublished(formData);
 
   const slugClean = slug
@@ -114,9 +114,9 @@ export async function updatePost(formData: FormData) {
     .replace(/-+/g, "-")
     .replace(/^-|-$/g, "");
 
-  if (!slugClean) throw new Error("Slug is required.");
+  if (!slugClean) return "Slug is required.";
   if (!(await checkSlugUnique(slugClean, id))) {
-    throw new Error("A post with this slug already exists.");
+    return "A post with this slug already exists.";
   }
 
   const { data: existing } = await supabase
@@ -148,22 +148,26 @@ export async function updatePost(formData: FormData) {
     })
     .eq("id", id);
 
-  if (error) throw new Error(error.message);
+  if (error) return error.message;
   revalidatePost(slugClean);
+  return null;
 }
 
-export async function deletePost(formData: FormData) {
+export async function deletePost(formData: FormData): Promise<string | null> {
   const supabase = await requireAdmin();
   const id = requireString(formData, "id");
+  if (!id) return "Required fields are missing.";
 
   const { error } = await supabase.from("posts").delete().eq("id", id);
-  if (error) throw new Error(error.message);
+  if (error) return error.message;
   revalidatePost();
+  return null;
 }
 
-export async function togglePublish(formData: FormData) {
+export async function togglePublish(formData: FormData): Promise<string | null> {
   const supabase = await requireAdmin();
   const id = requireString(formData, "id");
+  if (!id) return "Required fields are missing.";
   const isPublished = formData.get("is_published") === "true";
 
   const { data: existing } = await supabase
@@ -184,6 +188,7 @@ export async function togglePublish(formData: FormData) {
     )
     .eq("id", id);
 
-  if (error) throw new Error(error.message);
+  if (error) return error.message;
   revalidatePost(existing?.slug);
+  return null;
 }

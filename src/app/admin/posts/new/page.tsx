@@ -6,6 +6,7 @@ import { useState } from "react";
 import Markdown from "react-markdown";
 import { toast } from "sonner";
 import { createPost } from "@/app/admin/posts/actions";
+import { actionErrorMessage } from "@/lib/action-error";
 import { generateSlug } from "@/lib/slug";
 
 const CATEGORIES = [
@@ -88,11 +89,17 @@ export default function NewPostPage() {
       fd.set("category", displayCategory || "Update");
       fd.set("tags", JSON.stringify(tagsArray));
 
-      await createPost(fd);
+      const failure = await createPost(fd);
+      if (failure) {
+        setError(failure);
+        toast.error(failure);
+        setSubmitting(false);
+        return;
+      }
       toast.success("Post created");
       router.push("/admin/posts");
     } catch (err) {
-      const msg = err instanceof Error ? err.message : "Action failed";
+      const msg = actionErrorMessage(err);
       setError(msg);
       toast.error(msg);
       setSubmitting(false);
